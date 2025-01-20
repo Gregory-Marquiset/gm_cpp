@@ -1,0 +1,55 @@
+name: Build and Test C++ Project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Vérification du code source
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Installer les dépendances
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y g++ make valgrind
+
+      # Étape 3 : Build ex00
+      - name: Build ex00
+        working-directory: cpp_00/ex00
+        run: |
+          echo "Testing Makefile..."
+          make
+          echo "Cleaning and relinking..."
+          make clean
+          make
+          echo "Testing re..."
+          make re
+
+      # Étape 4 : Tests pour ex00
+      - name: Run tests for ex00
+        working-directory: cpp_00/ex00
+        run: |
+          echo "Running tests for ex00..."
+          ./megaphone "shhhhh... I think the students are asleep..." | grep -q "SHHHHH... I THINK THE STUDENTS ARE ASLEEP..."
+          ./megaphone "Damnit ! Sorry students, I thought this thing was off." | grep -q "DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF."
+          ./megaphone | grep -q "\* LOUD AND UNBEARABLE FEEDBACK NOISE \*"
+          echo "All tests passed for ex00!"
+
+      # Étape 5 : Placeholder pour ex01 et ex02
+      - name: Build and test ex01
+        if: success()
+        working-directory: cpp_00/ex01
+        run: echo "TODO: Implement tests for ex01"
+
+      - name: Build and test ex02
+        if: success()
+        working-directory: cpp_00/ex02
+        run: echo "TODO: Implement tests for ex02"
