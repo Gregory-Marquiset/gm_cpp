@@ -88,12 +88,12 @@ jobs:
           git add .
           git commit -m "Debugging branch: Fix failed tests"
           git push origin debug
-
+          
       - name: Push to main on success
         if: success()
         run: |
           git fetch origin main || echo "Branch 'main' does not exist. It will be created."
           git checkout main || git checkout -b main
-          git merge develop --strategy-option theirs
+          git merge develop --allow-unrelated-histories
           git push origin main
-        
+    
