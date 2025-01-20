@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -81,13 +81,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set debug branch
-        if: failure()
-        run: git checkout -b debug || git checkout debug
-
-      - name: Push to debug branch on failure
+      - name: Push to debug on failure
         if: failure()
         run: |
+          git checkout -b debug || git checkout debug
           git add .
           git commit -m "Debugging branch: Fix failed tests"
           git push origin debug
@@ -95,6 +92,8 @@ jobs:
       - name: Push to main on success
         if: success()
         run: |
-          git checkout main
-          git merge develop
+          git fetch origin main || echo "Branch 'main' does not exist. It will be created."
+          git checkout main || git checkout -b main
+          git merge develop --strategy-option theirs
           git push origin main
+        
