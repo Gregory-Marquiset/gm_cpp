@@ -85,15 +85,19 @@ jobs:
         run: |
           git config user.email "github-actions@github.com"
           git config user.name "GitHub Actions"
-        
+
+      - name: Configure GitHub authentication
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
       - name: Push to main on success
         if: success()
         run: |
           git fetch origin main || echo "Branch 'main' does not exist. It will be created."
           git checkout main || git checkout -b main
-          git merge develop --allow-unrelated-histories
+          git merge develop --allow-unrelated-histories --strategy-option theirs
           git push origin main
-      
+
       - name: Push to debug on failure
         if: failure()
         run: |
