@@ -98,6 +98,13 @@ jobs:
           git merge develop --allow-unrelated-histories --strategy-option theirs
           git push origin main
 
+      - name: Sync develop with main
+        if: success()
+        run: |
+          git checkout develop
+          git merge main || git rebase main
+          git push origin develop
+
       - name: Push to debug on failure
         if: failure()
         run: |
