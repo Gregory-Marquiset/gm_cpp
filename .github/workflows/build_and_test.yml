@@ -85,15 +85,7 @@ jobs:
         run: |
           git config user.email "github-actions@github.com"
           git config user.name "GitHub Actions"
-
-      - name: Push to debug on failure
-        if: failure()
-        run: |
-          git checkout -b debug || git checkout debug
-          git add .
-          git commit -m "Debugging branch: Fix failed tests"
-          git push origin debug
-
+        
       - name: Push to main on success
         if: success()
         run: |
@@ -101,4 +93,11 @@ jobs:
           git checkout main || git checkout -b main
           git merge develop --allow-unrelated-histories
           git push origin main
-    
+      
+      - name: Push to debug on failure
+        if: failure()
+        run: |
+          git checkout -b debug || git checkout debug
+          git add .
+          git commit -m "Debugging branch: Fix failed tests"
+          git push origin debug
