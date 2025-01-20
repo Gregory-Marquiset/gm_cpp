@@ -22,20 +22,20 @@ DEPENDENCIES = $(OBJ_PREF:.o=.d)
 all: $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp
-	@echo -e "$(YELLOW)Compiling $(RESET)$(CYAN)$<$(RESET)..."
+	@echo "$(YELLOW)Compiling $(RESET)$(CYAN)$<$(RESET)..."
 	@$(MK) $(dir $@) $(DEP_DIR)$(dir $<)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MMD -MF $(DEP_DIR)$*.d
 
 $(NAME): $(OBJ_PREF)
-	@echo -e "$(GREEN)Linking $(RESET)$(CYAN)$(NAME)$(RESET)..."
+	@echo "$(GREEN)Linking $(RESET)$(CYAN)$(NAME)$(RESET)..."
 	$(CC) $(CFLAGS) $(OBJ_PREF) -o $(NAME)
 
 clean:
-	@echo -e "$(RED)Cleaning object files and dependencies...$(RESET)"
+	@echo "$(RED)Cleaning object files and dependencies...$(RESET)"
 	$(RM) $(OBJ_DIR) $(DEP_DIR)
 
 fclean: clean
-	@echo -e "$(RED)Removing executable $(CYAN)$(NAME)$(RESET)..."
+	@echo "$(RED)Removing executable $(CYAN)$(NAME)$(RESET)..."
 	$(RM) $(NAME)
 
 re: fclean all
