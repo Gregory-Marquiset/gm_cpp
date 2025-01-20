@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - develop
   pull_request:
     branches:
       - main
+      - develop
 
 jobs:
   build:
@@ -19,31 +21,38 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y g++ make valgrind
 
-      - name: Build ex00
+      - name: Test cpp_00/ex00
         working-directory: cpp_00/ex00
         run: |
-          echo "Testing Makefile..."
+          echo "Testing Makefile for ex00"
           make
           echo "Cleaning and relinking..."
           make clean
           make
           echo "Testing re..."
           make re
+          echo "TODO: Implement tests for ex00"
 
-      - name: Run tests for ex00
-        if: success()
-        working-directory: cpp_00/ex00
-        run: |
-            echo "TODO: Implement tests for ex00"
-
-      - name: Build and test ex01
-        if: success()
+      - name: Test cpp_00/ex01
         working-directory: cpp_00/ex01
         run: |
-            echo "TODO: Implement tests for ex01"
+          echo "Testing Makefile for ex01"
+          make
+          echo "Cleaning and relinking..."
+          make clean
+          make
+          echo "Testing re..."
+          make re
+          echo "TODO: Implement tests for ex01"
 
-      - name: Build and test ex02
-        if: success()
+      - name: Test cpp_00/ex02
         working-directory: cpp_00/ex02
         run: |
-            echo "TODO: Implement tests for ex02"
+          echo "Testing Makefile for ex02"
+          make
+          echo "Cleaning and relinking..."
+          make clean
+          make
+          echo "Testing re..."
+          make re
+          echo "TODO: Implement tests for ex02"
