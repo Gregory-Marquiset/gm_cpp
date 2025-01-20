@@ -47,9 +47,11 @@ jobs:
       - name: Build and test ex01
         if: success()
         working-directory: cpp_00/ex01
-        run: echo "TODO: Implement tests for ex01"
+        run: |
+            echo "TODO: Implement tests for ex01"
 
       - name: Build and test ex02
         if: success()
         working-directory: cpp_00/ex02
-        run: echo "TODO: Implement tests for ex02"
+        run: |
+            echo "TODO: Implement tests for ex02"
