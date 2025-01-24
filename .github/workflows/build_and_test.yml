@@ -32,16 +32,6 @@ jobs:
           make re >> ../../debug.txt 2>&1
           echo "TODO: Implement tests for ex00" >> ../../debug.txt
           echo "Tests for ex00 complete." >> ../../debug.txt
-#          echo "Running tests for ex00..." >> ../../debug.txt
-#          ./megaphone "shhhhh... I think the students are asleep..." | grep -q "SHHHHH... I THINK THE STUDENTS ARE ASLEEP..." >> ../../debug.txt
-#          ./megaphone "Damnit ! Sorry students, I thought this thing was off." | grep -q "DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF." >> ../../debug.txt
-#          ./megaphone | grep -q "\* LOUD AND UNBEARABLE FEEDBACK NOISE \*" >> ../../debug.txt
-#          ./megaphone "" | grep -q "\* LOUD AND UNBEARABLE FEEDBACK NOISE \*" >> ../../debug.txt
-#          echo "Running valgrind for ex00..." >> ../../debug.txt
-#          valgrind --leak-check=full ./megaphone "shhhhh... I think the students are asleep..." >> ../../debug.txt
-#          valgrind --leak-check=full ./megaphone "Damnit ! Sorry students, I thought this thing was off." >> ../../debug.txt
-#          valgrind --leak-check=full ./megaphone >> ../../debug.txt
-#          valgrind --leak-check=full ./megaphone "" >> ../../debug.txt
 
       - name: Test cpp_00/ex01
         working-directory: cpp_00/ex01

@@ -1,6 +1,6 @@
 SRCS = srcs/megaphone.cpp
 INCLUDES = -Iincludes
-NAME = $(notdir $(CURDIR))
+NAME = megaphone
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MMD -MP
 RM = rm -rf
