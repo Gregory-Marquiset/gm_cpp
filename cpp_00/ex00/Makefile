@@ -9,7 +9,6 @@ MK = mkdir -p
 YELLOW = \033[1;33m
 GREEN = \033[1;32m
 CYAN = \033[1;36m
-RED = \033[1;31m
 RESET = \033[0m
 
 OBJ_DIR = obj/
@@ -27,15 +26,17 @@ $(OBJ_DIR)%.o: %.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MMD -MF $(DEP_DIR)$*.d
 
 $(NAME): $(OBJ_PREF)
-	@echo "$(GREEN)Linking $(RESET)$(CYAN)$(NAME)$(RESET)..."
+	@echo "$(YELLOW)Linking $(CYAN)$(NAME)$(RESET)..."
 	$(CC) $(CFLAGS) $(OBJ_PREF) -o $(NAME)
+	@echo "$(GREEN)Executable $(CYAN)$(NAME)$(GREEN) successfully created!$(RESET)"
+
 
 clean:
-	@echo "$(RED)Cleaning object files and dependencies...$(RESET)"
+	@echo "$(YELLOW)Cleaning object files and dependencies $(CYAN)$(OBJ_DIR) $(DEP_DIR)$(RESET)..."
 	$(RM) $(OBJ_DIR) $(DEP_DIR)
 
 fclean: clean
-	@echo "$(RED)Removing executable $(CYAN)$(NAME)$(RESET)..."
+	@echo "$(YELLOW)Removing executable $(CYAN)$(NAME)$(RESET)..."
 	$(RM) $(NAME)
 
 re: fclean all
