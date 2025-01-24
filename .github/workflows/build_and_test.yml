@@ -12,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    continue-on-error: true
 
     steps:
       - name: Checkout code
@@ -25,6 +24,7 @@ jobs:
         run: |
           artifact_log="failed_tests.txt"
           echo "" > $artifact_log
+          echo "success" > build_status.txt
 
           for script in $(find . -name "test_*.sh"); do
             echo "Running $script"
@@ -42,6 +42,7 @@ jobs:
 
           if [ -s $artifact_log ]; then
             echo "Some tests failed. See $artifact_log for details."
+            echo "failure" > build_status.txt
             exit 1
           else
             echo "All tests passed successfully."
@@ -54,13 +55,31 @@ jobs:
           name: failed-tests
           path: failed_tests.txt
 
+      - name: Upload build status
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-status
+          path: build_status.txt
+
   post:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Download build status
+        uses: actions/download-artifact@v4
+        with:
+          name: build-status
+          path: .
+
+      - name: Read build status
+        id: read_status
+        run: |
+          STATUS=$(cat build_status.txt)
+          echo "::set-output name=status::$STATUS"
 
       - name: Set up Git identity
         run: |
@@ -72,7 +91,7 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
       - name: Push to main on success
-        if: always() && success()
+        if: ${{ steps.read_status.outputs.status == 'success' }}
         run: |
           git fetch origin main || echo "Branch 'main' does not exist. It will be created."
           git checkout main || git checkout -b main
@@ -80,14 +99,14 @@ jobs:
           git push origin main
 
       - name: Sync develop with main
-        if: always() && success()
+        if: ${{ steps.read_status.outputs.status == 'success' }}
         run: |
           git checkout develop
           git merge main || git rebase main
           git push origin develop
 
       - name: Push to debug on failure
-        if: always() && failure()
+        if: ${{ steps.read_status.outputs.status == 'failure' }}
         run: |
           git checkout -b debug || git checkout debug
           git add .
