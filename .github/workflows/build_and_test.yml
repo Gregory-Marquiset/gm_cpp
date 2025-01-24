@@ -20,53 +20,43 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y g++ make valgrind
 
-      - name: Test cpp_00/ex00
-        working-directory: cpp_00/ex00
+      - name: Run test scripts
         run: |
-          echo "Testing Makefile for ex00"
-          make >> ../../debug.txt 2>&1
-          echo "Cleaning and relinking..." >> ../../debug.txt
-          make clean >> ../../debug.txt 2>&1
-          make >> ../../debug.txt 2>&1
-          echo "Testing re..." >> ../../debug.txt
-          make re >> ../../debug.txt 2>&1
-          echo "TODO: Implement tests for ex00" >> ../../debug.txt
-          echo "Tests for ex00 complete." >> ../../debug.txt
+          artifact_log="failed_tests.txt"
+          echo "" > $artifact_log
 
-      - name: Test cpp_00/ex01
-        working-directory: cpp_00/ex01
-        run: |
-          echo "Testing Makefile for ex01" >> ../../debug.txt
-          make >> ../../debug.txt 2>&1
-          echo "Cleaning and relinking..." >> ../../debug.txt
-          make clean >> ../../debug.txt 2>&1
-          make >> ../../debug.txt 2>&1
-          echo "Testing re..." >> ../../debug.txt
-          make re >> ../../debug.txt 2>&1
-          echo "TODO: Implement tests for ex01" >> ../../debug.txt
+          for script in $(find . -name "test_*.sh"); do
+            echo "Running $script"
+            dir=$(dirname "$script")
+            cd $dir
+            
+            bash $(basename "$script")
+            
+            if [ -f debug.txt ]; then
+              echo "$(basename $dir): debug.txt found. Test failed." >> ../$artifact_log
+            fi
 
-      - name: Test cpp_00/ex02
-        working-directory: cpp_00/ex02
-        run: |
-          echo "Testing Makefile for ex02" >> ../../debug.txt
-          make >> ../../debug.txt 2>&1
-          echo "Cleaning and relinking..." >> ../../debug.txt
-          make clean >> ../../debug.txt 2>&1
-          make >> ../../debug.txt 2>&1
-          echo "Testing re..." >> ../../debug.txt
-          make re >> ../../debug.txt 2>&1
-          echo "TODO: Implement tests for ex02" >> ../../debug.txt
+            cd - > /dev/null
+          done
 
-      - name: Upload debug logs
+          if [ -s $artifact_log ]; then
+            echo "Some tests failed. See $artifact_log for details."
+            exit 1
+          else
+            echo "All tests passed successfully."
+          fi
+
+      - name: Upload artifact if tests failed
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: debug-logs
-          path: debug.txt
+          name: failed-tests
+          path: failed_tests.txt
 
   post:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
