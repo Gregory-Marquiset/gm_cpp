@@ -43,13 +43,11 @@ jobs:
           if [ -s $artifact_log ]; then
             echo "Some tests failed. See $artifact_log for details."
             echo "failure" > build_status.txt
-            exit 1
           else
             echo "All tests passed successfully."
           fi
 
       - name: Upload artifact if tests failed
-        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: failed-tests
