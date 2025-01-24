@@ -33,7 +33,7 @@ jobs:
             bash $(basename "$script")
             
             if [ -f debug.txt ]; then
-              echo "$(basename $dir): debug.txt found. Test failed." >> ../$artifact_log
+              echo "$(basename $dir): Test failed." >> ../../$artifact_log
             fi
 
             cd - > /dev/null
@@ -48,7 +48,7 @@ jobs:
 
       - name: Upload artifact if tests failed
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: failed-tests
           path: failed_tests.txt
