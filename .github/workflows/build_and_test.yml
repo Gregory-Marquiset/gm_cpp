@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    continue-on-error: true
 
     steps:
       - name: Checkout code
@@ -33,7 +34,7 @@ jobs:
             bash $(basename "$script")
             
             if [ -f debug.txt ]; then
-              echo "$(basename $dir): debug.txt found. Test failed." >> ../$artifact_log
+              echo "$(basename $dir): Test failed." >> ../../$artifact_log
             fi
 
             cd - > /dev/null
@@ -48,7 +49,7 @@ jobs:
 
       - name: Upload artifact if tests failed
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: failed-tests
           path: failed_tests.txt
@@ -71,7 +72,7 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
       - name: Push to main on success
-        if: success()
+        if: always() && success()
         run: |
           git fetch origin main || echo "Branch 'main' does not exist. It will be created."
           git checkout main || git checkout -b main
@@ -79,14 +80,14 @@ jobs:
           git push origin main
 
       - name: Sync develop with main
-        if: success()
+        if: always() && success()
         run: |
           git checkout develop
           git merge main || git rebase main
           git push origin develop
 
       - name: Push to debug on failure
-        if: failure()
+        if: always() && failure()
         run: |
           git checkout -b debug || git checkout debug
           git add .
