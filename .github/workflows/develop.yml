@@ -1,0 +1,61 @@
+name: Develop Branch Workflow
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y g++ make valgrind
+
+      - name: Run test scripts
+        run: |
+          artifact_log="failed_tests.txt"
+          echo "" > $artifact_log
+          echo "success" > build_status.txt
+
+          for script in $(find . -name "test_m0*ex*.sh"); do
+            echo "Running $script"
+            dir=$(dirname "$script")
+            cd $dir
+
+            bash $(basename "$script")
+
+            if [ -f debug.txt ]; then
+              echo "$(basename $dir): Test failed." >> ../../$artifact_log
+            fi
+
+            cd - > /dev/null
+          done
+
+          if [ -s $artifact_log ]; then
+            echo "Some tests failed. See $artifact_log for details."
+            echo "failure" > build_status.txt
+          else
+            echo "All tests passed successfully."
+          fi
+
+      - name: Upload failed tests log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-tests
+          path: failed_tests.txt
+
+      - name: Push to debug on failure
+        if: failure()
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git checkout -b debug || git checkout debug
+          git add .
+          git commit -m "Debugging branch: Fix failed tests"
+          git push origin debug
