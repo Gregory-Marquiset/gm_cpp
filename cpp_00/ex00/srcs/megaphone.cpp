@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 			trigger++;
 		}
 	}
-	if (argc == 1 || trigger == 0)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+	/*if (argc == 1 || trigger == 0)
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;*/
 	return (0);
 }
