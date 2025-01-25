@@ -21,7 +21,7 @@ jobs:
           failed=false
 
           for script in $(find . -name "test_m0*ex*.sh"); do
-            echo -e "\033[1;33mRunning $script\033[0m"
+            echo -e "\033[1;33mRunning $script\033[0m\n"
             dir=$(dirname "$script")
             cd $dir
 
