@@ -49,8 +49,8 @@ else
 fi
 
 # ---------------------- Tests exercice ----------------------
-echo -e "\033[1;33m\nRunning tests for ex00...\033[0m" >> debug.txt
-echo -e "\033[1;33m\nRunning tests for ex00...\033[0m"
+echo -e "\n\033[1;33m\nRunning tests for ex00...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning tests for ex00...\033[0m"
 
 # Test 1
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
@@ -148,8 +148,8 @@ else
 fi
 
 # ---------------------- Tests valgrind ----------------------
-echo -e "\033[1;33m\nRunning valgrind for ex00...\033[0m"
-echo -e "\033[1;33m\nRunning valgrind for ex00...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning valgrind for ex00...\033[0m"
+echo -e "\n\033[1;33mRunning valgrind for ex00...\033[0m" >> debug.txt
 
 # Valgrind Test 1
 echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
@@ -222,8 +222,8 @@ else
 fi
 
 # ---------------------- Fin et netoyage ----------------------
-echo -e "\033[1;33m\nRunning Makefile commands...\033[0m"
-echo -e "\033[1;33m\nRunning Makefile commands...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning Makefile commands...\033[0m"
+echo -e "\n\033[1;33mRunning Makefile commands...\033[0m" >> debug.txt
 echo -e "\033[1;36mRunning make fclean...\033[0m"
 echo -e "\033[1;36mRunning make fclean...\033[0m" >> debug.txt
 make fclean > .make.txt 2>&1
@@ -241,7 +241,7 @@ rm -f .make.txt .output.txt .expected.txt .valgrind.txt
 
 if $all_tests_passed; then
     rm -f debug.txt
-    echo -e "\033[1;32m\nTous les tests sont valides.\033[0m"
+    echo -e "\n\033[1;32mTous les tests sont valides.\033[0m"
 else
-    echo -e "\033[1;31m\nCertains tests ont échoué. Consultez debug.txt pour les détails.\033[0m"
+    echo -e "\n\033[1;31mCertains tests ont échoué. Consultez debug.txt pour les détails.\033[0m"
 fi

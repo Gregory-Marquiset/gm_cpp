@@ -1,4 +1,4 @@
-name: Protect Main Branch
+name: Protect Main Branch Push
 
 on:
   push:
@@ -20,15 +20,15 @@ jobs:
 
       - name: Check if 'develop' branch exists
         run: |
-          git fetch origin develop || echo "Branch 'develop' does not exist."
+          git fetch origin develop || echo -e "\033[1;33mBranch 'develop' does not exist.\033[0m"
 
       - name: Create 'develop' branch if it doesn't exist
         run: |
           if ! git ls-remote --exit-code origin develop; then
             git branch develop
-            echo "Branch 'develop' created."
+            echo -e "\033[1;36mBranch 'develop' created.\033[0m"
           else
-            echo "Branch 'develop' already exists."
+            echo -e "\033[1;36mBranch 'develop' already exists.\033[0m"
           fi
 
       - name: Redirect push to 'develop'
@@ -39,4 +39,4 @@ jobs:
 
       - name: Block push to 'main'
         run: |
-          echo "Push to 'main' is prohibited. Changes have been redirected to 'develop'."
+          echo -e "\033[1;31mPush to 'main' is prohibited. Changes have been redirected to 'develop'.\033[0m"
