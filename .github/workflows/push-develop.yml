@@ -52,7 +52,7 @@ jobs:
             failed_tests.txt
           if-no-files-found: ignore
 
-  redirect-on-failure:
+  redirect-or-push:
     needs: run-tests
     runs-on: ubuntu-24.04
     if: always()
