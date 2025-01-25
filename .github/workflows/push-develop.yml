@@ -21,7 +21,7 @@ jobs:
           failed=false
 
           for script in $(find . -name "test_m0*ex*.sh"); do
-            echo "\033[1;33mRunning $script\033[0m"
+            echo -e "\033[1;33mRunning $script\033[0m"
             dir=$(dirname "$script")
             cd $dir
 
@@ -36,10 +36,10 @@ jobs:
           done
 
           if [ "$failed" = true ]; then
-            echo "\n\033[1;31mTests failed. See failed_tests.txt for details.\033[0m"
+            echo -e "\n\033[1;31mTests failed. See failed_tests.txt for details.\033[0m"
             echo "failure" > build_status.txt
           else
-            echo "\n\033[1;32mAll tests passed successfully.\033[0m"
+            echo -e "\n\033[1;32mAll tests passed successfully.\033[0m"
             echo "success" > build_status.txt
           fi
 
@@ -66,26 +66,29 @@ jobs:
         with:
           name: test-results
 
-      - name: Check build status
-        id: check_status
+      - name: Read build status from file
         run: |
           STATUS=$(cat build_status.txt)
-          echo "::set-output name=status::$STATUS"
+          echo $STATUS > /tmp/build_status.txt
 
       - name: Redirect push to debug
-        if: steps.check_status.outputs.status == 'failure'
         run: |
-          git fetch origin debug || echo "\033[1;33mBranch 'debug' does not exist.\033[0m"
-          if ! git ls-remote --exit-code origin debug; then
-            git branch debug
-            echo "\033[1;36mBranch 'debug' created.\033[0m"
+          STATUS=$(cat /tmp/build_status.txt)
+          if [ "$STATUS" = "failure" ]; then
+            git fetch origin debug || echo -e "\033[1;33mBranch 'debug' does not exist.\033[0m"
+            if ! git ls-remote --exit-code origin debug; then
+              git branch debug
+              echo -e "\033[1;36mBranch 'debug' created.\033[0m"
+            fi
+
+            git checkout debug
+            git merge develop --allow-unrelated-histories --strategy-option theirs
+            git push origin debug
           fi
 
-          git checkout debug
-          git merge develop --allow-unrelated-histories --strategy-option theirs
-          git push origin debug
-
       - name: Authorize push to develop
-        if: steps.check_status.outputs.status == 'success'
         run: |
-          echo "\033[1;32mTests passed. Push to 'develop' is allowed.\033[0m"
+          STATUS=$(cat /tmp/build_status.txt)
+          if [ "$STATUS" = "success" ]; then
+            echo -e "\033[1;32mTests passed. Push to 'develop' is allowed.\033[0m"
+          fi
