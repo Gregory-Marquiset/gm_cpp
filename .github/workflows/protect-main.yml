@@ -1,0 +1,35 @@
+name: Protect Main Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  redirect-to-develop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Redirect push to develop
+        run: |
+          # Create the develop branch if it doesn't exist
+          git fetch origin
+          if ! git rev-parse --verify origin/develop; then
+            echo "Branch 'develop' does not exist. Creating it now."
+            git checkout -b develop
+            git push origin develop
+          fi
+
+          # Force-push the commits to develop
+          echo "Redirecting commits from 'main' to 'develop'."
+          git checkout develop
+          git merge main --no-edit
+          git push origin develop
