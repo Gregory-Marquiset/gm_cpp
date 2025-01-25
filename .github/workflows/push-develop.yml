@@ -41,6 +41,7 @@ jobs:
           else
             echo "All tests passed successfully."
             echo "success" > build_status.txt
+            exit 0
           fi
 
       - name: Upload failed tests log
