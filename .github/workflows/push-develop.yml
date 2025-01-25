@@ -1,4 +1,4 @@
-name: Develop Branch Push Workflow
+name: Develop Branch Workflow
 
 on:
   push:
@@ -18,9 +18,7 @@ jobs:
 
       - name: Run test scripts
         run: |
-          artifact_log="failed_tests.txt"
-          echo "" > $artifact_log
-          echo "success" > build_status.txt
+          failed=false
 
           for script in $(find . -name "test_m0*ex*.sh"); do
             echo "Running $script"
@@ -30,17 +28,19 @@ jobs:
             bash $(basename "$script")
 
             if [ -f debug.txt ]; then
-              echo "$(basename $dir): Test failed." >> ../../$artifact_log
+              echo "$(basename $dir): Test failed." >> ../failed_tests.txt
+              failed=true
             fi
 
             cd - > /dev/null
           done
 
-          if [ -s $artifact_log ]; then
-            echo "Tests failed. See $artifact_log for details."
+          if [ "$failed" = true ]; then
+            echo "Tests failed. See failed_tests.txt for details."
             echo "failure" > build_status.txt
           else
             echo "All tests passed successfully."
+            echo "success" > build_status.txt
           fi
 
       - name: Upload failed tests log
