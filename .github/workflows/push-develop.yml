@@ -21,7 +21,7 @@ jobs:
           failed=false
 
           for script in $(find . -name "test_m0*ex*.sh"); do
-            echo "Running $script"
+            echo "\033[1;33mRunning $script\033[0m"
             dir=$(dirname "$script")
             cd $dir
 
@@ -36,10 +36,10 @@ jobs:
           done
 
           if [ "$failed" = true ]; then
-            echo "Tests failed. See failed_tests.txt for details."
+            echo "\n\033[1;31mTests failed. See failed_tests.txt for details.\033[0m"
             echo "failure" > build_status.txt
           else
-            echo "All tests passed successfully."
+            echo "\n\033[1;32mAll tests passed successfully.\033[0m"
             echo "success" > build_status.txt
           fi
 
@@ -75,10 +75,10 @@ jobs:
       - name: Redirect push to debug
         if: steps.check_status.outputs.status == 'failure'
         run: |
-          git fetch origin debug || echo "Branch 'debug' does not exist."
+          git fetch origin debug || echo "\033[1;33mBranch 'debug' does not exist.\033[0m"
           if ! git ls-remote --exit-code origin debug; then
             git branch debug
-            echo "Branch 'debug' created."
+            echo "\033[1;36mBranch 'debug' created.\033[0m"
           fi
 
           git checkout debug
@@ -88,4 +88,4 @@ jobs:
       - name: Authorize push to develop
         if: steps.check_status.outputs.status == 'success'
         run: |
-          echo "Tests passed. Push to 'develop' is allowed."
+          echo "\033[1;32mTests passed. Push to 'develop' is allowed.\033[0m"
