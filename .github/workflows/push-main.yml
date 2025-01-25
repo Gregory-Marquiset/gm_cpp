@@ -1,0 +1,42 @@
+name: Protect Main Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  redirect-to-develop:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Check if 'develop' branch exists
+        run: |
+          git fetch origin develop || echo "Branch 'develop' does not exist."
+
+      - name: Create 'develop' branch if it doesn't exist
+        run: |
+          if ! git ls-remote --exit-code origin develop; then
+            git branch develop
+            echo "Branch 'develop' created."
+          else
+            echo "Branch 'develop' already exists."
+          fi
+
+      - name: Redirect push to 'develop'
+        run: |
+          git checkout develop
+          git merge main --allow-unrelated-histories --strategy-option theirs
+          git push origin develop
+
+      - name: Block push to 'main'
+        run: |
+          echo "Push to 'main' is prohibited. Changes have been redirected to 'develop'."
