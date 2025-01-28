@@ -1,0 +1,16 @@
+Enter command: First name: Last name: Nickname: Phone number: Darkest secret: Enter command:      Index|First name| Last name|  Nickname|
+--------------------------------------------
+         1|   Gregory| Marquiset|Quardanna.|
+         2|          |          |          |
+         3|          |          |          |
+         4|          |          |          |
+         5|          |          |          |
+         6|          |          |          |
+         7|          |          |          |
+         8|          |          |          |
+Enter the index of the contact to view details (1-8): First name: Gregory
+Last name: Marquiset
+Nickname: Quardannault
+Phone number: 07.71.69.27.25
+Darkest secret: Regrete d'avoir perdu des annees de vie sur Halo 3 et Dark souls.
+Enter command: 
