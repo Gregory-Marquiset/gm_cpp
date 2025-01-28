@@ -1,20 +1,21 @@
 # include "../includes/PhoneBook.hpp"
 
-int	main()
+int	main(void)
 {
-	PhoneBook phoneBook;
-	std::string command;
+	PhoneBook	phoneBook;
+	std::string	command;
 
 	while (true)
 	{
 		std::cout << "Enter command: ";
-		std::getline(std::cin, command);
+		if (!std::getline(std::cin, command))
+			break ;
 		if (command == "EXIT")
 			break ;
 		else if (command == "ADD")
-			std::cout << "Command ADD." << std::endl;
+			phoneBook.addContact();
 		else if (command == "SEARCH")
-			std::cout << "Command SEARCH." << std::endl;
+			phoneBook.searchContact();
 		else
 			std::cout << "Command invalide." << std::endl;
 	}

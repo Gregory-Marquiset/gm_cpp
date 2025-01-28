@@ -4,6 +4,7 @@
 # include <iostream>
 # include <string>
 # include <iomanip>
+# include <sstream>
 
 class Contact
 {
@@ -11,9 +12,12 @@ class Contact
 		std::string	firstName;
 		std::string	lastName;
 		std::string	nickName;
-		int			phoneNumber;
+		std::string	phoneNumber;
 		std::string	darkestSecret;
 	public:
+		void	getInfo();
+		void	displaySummary(int index) const;
+		void	displayDetails() const;
 };
 
 

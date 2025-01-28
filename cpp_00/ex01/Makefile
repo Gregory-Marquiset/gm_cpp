@@ -1,4 +1,6 @@
-SRCS = srcs/main.cpp
+SRCS = srcs/main.cpp \
+	   srcs/PhoneBook.cpp \
+	   srcs/Contact.cpp
 INCLUDES = -Iincludes
 NAME = phonebook
 CC = c++

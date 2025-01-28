@@ -7,10 +7,11 @@ class PhoneBook
 {
 	private:
 		Contact	contacts[8];
-		int		currentIndex;
+		int		index;
 	public:
 		PhoneBook();
 		void	addContact();
+		void	searchContact();
 };
 
 #endif //PHONEBOOK_HPP
