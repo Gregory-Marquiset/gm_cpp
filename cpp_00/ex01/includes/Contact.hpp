@@ -20,6 +20,4 @@ class Contact
 		void	displayDetails() const;
 };
 
-
-
 #endif //CONTACT_HPP
