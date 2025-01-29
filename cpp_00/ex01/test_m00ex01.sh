@@ -118,23 +118,124 @@ else
 fi
 
 # # Test 3
-# echo -e "\033[1;36mTest 3:\033[0m" >> debug.txt
-# echo -e "\033[1;36mTest 3:\033[0m"
-# ./megaphone "" > .output.txt 2>&1
-# echo -n "* LOUD AND UNBEARABLE FEEDBACK NOISE *
-# " > .expected.txt 2>&1
-# if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
-#     echo -e "\033[1;32mValide\033[0m"
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-# else
-#     echo -e "\033[1;33mOutput megaphone:\033[0m" >> debug.txt
-#     cat .output.txt >> debug.txt
-#     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
-#     cat .expected.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
+echo -e "\033[1;36mTest 3:\033[0m" >> debug.txt
+echo -e "\033[1;36mTest 3:\033[0m"
+./phonebook << EOF > .output.txt 2>&1
+ADD
+Gregory
+Marquiset
+Quardannault
+07.71.69.27.25
+Regrete d'avoir perdu des annees de vie sur Halo 3 et Dark souls.
+ADD
+Charles-louis
+Dutel
+WPMad
+07.52.62.45.23
+Ne sait pas faire un parse sans segfault.
+ADD
+Maxime
+Torgue
+Maxou2603
+06.56.81.12.20 
+Genre il boite mais en vrais il roule juste du cul.
+ADD
+David
+Wayenborgh
+22dewey22
+06.55.91.11.73
+Assume pas d'etre de droite.
+ADD
+Marie
+Langlois
+Maria
+07.64.25.10.11
+Choisi mal ces potes.
+ADD
+Garfi
+Garfi
+Garfi
+Garfi
+Garfi garfi garfi garfi.
+ADD
+Vincent
+Fresnais
+???
+07.94.61.20.23
+Probablement l'homme le plus beau du monde.
+ADD
+Laura
+Nunez Torres
+???
+07.56.95.99.42
+La meuf est bretonne, y parait. 
+SEARCH
+4
+ADD
+Xavier
+Niel
+Le xav
+07.80.56.55.23
+...
+SEARCH
+1
+EXIT
+EOF
+echo -n "Enter command: First name: Last name: Nickname: Phone number: \
+Darkest secret: Enter command: First name: Last name: Nickname: \
+Phone number: Darkest secret: Enter command: First name: Last name: \
+Nickname: Phone number: Darkest secret: Enter command: First name: \
+Last name: Nickname: Phone number: Darkest secret: Enter command: \
+First name: Last name: Nickname: Phone number: Darkest secret: \
+Enter command: First name: Last name: Nickname: Phone number: \
+Darkest secret: Enter command: First name: Last name: Nickname: \
+Phone number: Darkest secret: Enter command: First name: Last name: \
+Nickname: Phone number: Darkest secret: Enter command: \
+     Index|First name| Last name|  Nickname|
+--------------------------------------------
+         1|   Gregory| Marquiset|Quardanna.|
+         2|Charles-l.|     Dutel|     WPMad|
+         3|    Maxime|    Torgue| Maxou2603|
+         4|     David|Wayenborgh| 22dewey22|
+         5|     Marie|  Langlois|     Maria|
+         6|     Garfi|     Garfi|     Garfi|
+         7|   Vincent|  Fresnais|       ???|
+         8|     Laura|Nunez Tor.|       ???|
+Enter the index of the contact to view details (1-8): First name: David
+Last name: Wayenborgh
+Nickname: 22dewey22
+Phone number: 06.55.91.11.73
+Darkest secret: Assume pas d'etre de droite.
+Enter command: First name: Last name: Nickname: Phone number: \
+Darkest secret: Enter command: \
+     Index|First name| Last name|  Nickname|
+--------------------------------------------
+         1|    Xavier|      Niel|    Le xav|
+         2|Charles-l.|     Dutel|     WPMad|
+         3|    Maxime|    Torgue| Maxou2603|
+         4|     David|Wayenborgh| 22dewey22|
+         5|     Marie|  Langlois|     Maria|
+         6|     Garfi|     Garfi|     Garfi|
+         7|   Vincent|  Fresnais|       ???|
+         8|     Laura|Nunez Tor.|       ???|
+Enter the index of the contact to view details (1-8): First name: Xavier
+Last name: Niel
+Nickname: Le xav
+Phone number: 07.80.56.55.23
+Darkest secret: ...
+Enter command: " > .expected.txt 2>&1
+if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
+    echo -e "\033[1;32mValide\033[0m"
+    echo -e "\033[1;32mValide\033[0m" >> debug.txt
+else
+    echo -e "\033[1;33mOutput megaphone:\033[0m" >> debug.txt
+    cat .output.txt >> debug.txt
+    echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
+    cat .expected.txt >> debug.txt
+    echo -e "\033[1;31mInvalide\033[0m"
+    echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
+    all_tests_passed=false
+fi
 
 # # Test 4
 # echo -e "\033[1;36mTest 4:\033[0m" >> debug.txt
