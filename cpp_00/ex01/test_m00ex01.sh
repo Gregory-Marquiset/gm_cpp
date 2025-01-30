@@ -63,7 +63,7 @@ if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 else
-    echo -e "\033[1;33mOutput megaphone:\033[0m" >> debug.txt
+    echo -e "\033[1;33mOutput phonebook:\033[0m" >> debug.txt
     cat .output.txt >> debug.txt
     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
     cat .expected.txt >> debug.txt
@@ -108,7 +108,7 @@ if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 else
-    echo -e "\033[1;33mOutput megaphone:\033[0m" >> debug.txt
+    echo -e "\033[1;33mOutput phonebook:\033[0m" >> debug.txt
     cat .output.txt >> debug.txt
     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
     cat .expected.txt >> debug.txt
@@ -228,7 +228,7 @@ if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 else
-    echo -e "\033[1;33mOutput megaphone:\033[0m" >> debug.txt
+    echo -e "\033[1;33mOutput phonebook:\033[0m" >> debug.txt
     cat .output.txt >> debug.txt
     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
     cat .expected.txt >> debug.txt
@@ -251,7 +251,7 @@ if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 else
-    echo -e "\033[1;33mOutput megaphone:\033[0m" >> debug.txt
+    echo -e "\033[1;33mOutput phonebook:\033[0m" >> debug.txt
     cat .output.txt >> debug.txt
     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
     cat .expected.txt >> debug.txt
@@ -273,7 +273,7 @@ if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 else
-    echo -e "\033[1;33mOutput megaphone:\033[0m" >> debug.txt
+    echo -e "\033[1;33mOutput phonebook:\033[0m" >> debug.txt
     cat .output.txt >> debug.txt
     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
     cat .expected.txt >> debug.txt

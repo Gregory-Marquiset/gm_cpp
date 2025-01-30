@@ -1,5 +1,5 @@
 SRCS = srcs/Account.cpp \
-	   srcs/test.cpp
+	   srcs/tests.cpp
 INCLUDES = -Iincludes
 NAME = gbu
 CC = c++
