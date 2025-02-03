@@ -1,4 +1,0 @@
-#ifndef NEWZOMBIE_HPP
-#define NEWZOMBIE_HPP
-
-#endif //NEWZOMBIE_HPP

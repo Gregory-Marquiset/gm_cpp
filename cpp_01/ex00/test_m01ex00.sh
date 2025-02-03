@@ -48,173 +48,49 @@ else
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 fi
 
-# # ---------------------- Tests exercice ----------------------
-# echo -e "\n\033[1;33m\nRunning tests for ex00...\033[0m" >> debug.txt
-# echo -e "\n\033[1;33mRunning tests for ex00...\033[0m"
+# ---------------------- Tests exercice ----------------------
+echo -e "\n\033[1;33m\nRunning tests for ex00...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning tests for ex00...\033[0m"
 
-# # Test 1
-# echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
-# echo -e "\033[1;36mTest 1:\033[0m"
-# ./zombie << EOF > .output.txt 2>&1
-# echo -n "" > .expected.txt 2>&1
-# if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
-#     echo -e "\033[1;32mValide\033[0m"
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-# else
-#     echo -e "\033[1;33mOutput zombie:\033[0m" >> debug.txt
-#     cat .output.txt >> debug.txt
-#     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
-#     cat .expected.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
+# Test 1
+echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
+echo -e "\033[1;36mTest 1:\033[0m"
+./zombie > .output.txt 2>&1
+echo -n "Heapz: BraiiiiiiinnnzzzZ...
+Heapz destroyed.
+Stackz: BraiiiiiiinnnzzzZ...
+Stackz destroyed.
+" > .expected.txt 2>&1
+if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
+    echo -e "\033[1;32mValide\033[0m"
+    echo -e "\033[1;32mValide\033[0m" >> debug.txt
+else
+    echo -e "\033[1;33mOutput zombie:\033[0m" >> debug.txt
+    cat .output.txt >> debug.txt
+    echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
+    cat .expected.txt >> debug.txt
+    echo -e "\033[1;31mInvalide\033[0m"
+    echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
+    all_tests_passed=false
+fi
 
-# # Test 2
-# echo -e "\033[1;36mTest 2:\033[0m" >> debug.txt
-# echo -e "\033[1;36mTest 2:\033[0m"
-# ./zombie << EOF > .output.txt 2>&1
-# echo -n "" > .expected.txt 2>&1
-# if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
-#     echo -e "\033[1;32mValide\033[0m"
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-# else
-#     echo -e "\033[1;33mOutput zombie:\033[0m" >> debug.txt
-#     cat .output.txt >> debug.txt
-#     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
-#     cat .expected.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
+# ---------------------- Tests valgrind ----------------------
+echo -e "\n\033[1;33mRunning valgrind for ex00...\033[0m"
+echo -e "\n\033[1;33mRunning valgrind for ex00...\033[0m" >> debug.txt
 
-# # Test 3
-# echo -e "\033[1;36mTest 3:\033[0m" >> debug.txt
-# echo -e "\033[1;36mTest 3:\033[0m"
-# ./zombie << EOF > .output.txt 2>&1
-# echo -n "" > .expected.txt 2>&1
-# if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
-#     echo -e "\033[1;32mValide\033[0m"
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-# else
-#     echo -e "\033[1;33mOutput zombie:\033[0m" >> debug.txt
-#     cat .output.txt >> debug.txt
-#     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
-#     cat .expected.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
-
-# # Test 4
-# echo -e "\033[1;36mTest 4:\033[0m" >> debug.txt
-# echo -e "\033[1;36mTest 4:\033[0m"
-# ./zombie << EOF > .output.txt 2>&1
-# echo -n "" > .expected.txt 2>&1
-# if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
-#     echo -e "\033[1;32mValide\033[0m"
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-# else
-#     echo -e "\033[1;33mOutput zombie:\033[0m" >> debug.txt
-#     cat .output.txt >> debug.txt
-#     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
-#     cat .expected.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
-
-# # Test 5
-# echo -e "\033[1;36mTest 5:\033[0m" >> debug.txt
-# echo -e "\033[1;36mTest 5:\033[0m"
-# ./zombie << EOF > .output.txt 2>&1
-# echo -n "" > .expected.txt 2>&1
-# if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
-#     echo -e "\033[1;32mValide\033[0m"
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-# else
-#     echo -e "\033[1;33mOutput zombie:\033[0m" >> debug.txt
-#     cat .output.txt >> debug.txt
-#     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
-#     cat .expected.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
-
-# # ---------------------- Tests valgrind ----------------------
-# echo -e "\n\033[1;33mRunning valgrind for ex00...\033[0m"
-# echo -e "\n\033[1;33mRunning valgrind for ex00...\033[0m" >> debug.txt
-
-# # Valgrind Test 1
-# echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
-# echo -e "\033[1;36mValgrind Test 1:\033[0m"
-# valgrind --leak-check=full ./zombie << EOF > .valgrind.txt 2>&1
-# if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-#     echo -e "\033[1;32mValide\033[0m"
-# else
-#     cat .valgrind.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
-
-# # Valgrind Test 2
-# echo -e "\033[1;36mValgrind Test 2:\033[0m" >> debug.txt
-# echo -e "\033[1;36mValgrind Test 2:\033[0m"
-# valgrind --leak-check=full ./zombie << EOF > .valgrind.txt 2>&1
-# if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-#     echo -e "\033[1;32mValide\033[0m"
-# else
-#     cat .valgrind.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
-
-# # Valgrind Test 3
-# echo -e "\033[1;36mValgrind Test 3:\033[0m" >> debug.txt
-# echo -e "\033[1;36mValgrind Test 3:\033[0m"
-# valgrind --leak-check=full ./zombie << EOF > .valgrind.txt 2>&1
-# if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-#     echo -e "\033[1;32mValide\033[0m"
-# else
-#     cat .valgrind.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
-
-# # Valgrind Test 4
-# echo -e "\033[1;36mValgrind Test 4:\033[0m" >> debug.txt
-# echo -e "\033[1;36mValgrind Test 4:\033[0m"
-# valgrind --leak-check=full ./zombie << EOF > .valgrind.txt 2>&1
-# if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-#     echo -e "\033[1;32mValide\033[0m"
-# else
-#     cat .valgrind.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
-
-# # Valgrind Test 5
-# echo -e "\033[1;36mValgrind Test 5:\033[0m" >> debug.txt
-# echo -e "\033[1;36mValgrind Test 5:\033[0m"
-# valgrind --leak-check=full ./zombie << EOF > .valgrind.txt 2>&1
-# if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
-#     echo -e "\033[1;32mValide\033[0m" >> debug.txt
-#     echo -e "\033[1;32mValide\033[0m"
-# else
-#     cat .valgrind.txt >> debug.txt
-#     echo -e "\033[1;31mInvalide\033[0m"
-#     echo -e "\033[1;31mInvalide\033[0m" >> debug.txt
-#     all_tests_passed=false
-# fi
+# Valgrind Test 1
+echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
+echo -e "\033[1;36mValgrind Test 1:\033[0m"
+valgrind --leak-check=full ./zombie > .valgrind.txt 2>&1
+if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
+    echo -e "\033[1;32mValide\033[0m" >> debug.txt
+    echo -e "\033[1;32mValide\033[0m"
+else
+    cat .valgrind.txt >> debug.txt
+    echo -e "\033[1;31mInvalide\033[0m"
+    echo -e "\033[1;31mInvalide\n\033[0m" >> debug.txt
+    all_tests_passed=false
+fi
 
 # ---------------------- Fin et netoyage ----------------------
 echo -e "\n\033[1;33mRunning Makefile commands...\033[0m"
