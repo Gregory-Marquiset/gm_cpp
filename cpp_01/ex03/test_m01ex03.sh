@@ -49,32 +49,22 @@ else
 fi
 
 # ---------------------- Tests exercice ----------------------
-echo -e "\n\033[1;33m\nRunning tests for ex02...\033[0m" >> debug.txt
-echo -e "\n\033[1;33mRunning tests for ex02...\033[0m"
+echo -e "\n\033[1;33m\nRunning tests for ex03...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning tests for ex03...\033[0m"
 
 # Test 1
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 1:\033[0m"
-./ref > .output.txt 2>&1
-A1=$(grep "Address of str:" .output.txt | awk '{print $4}')
-A2=$(grep "Address of strptr:" .output.txt | awk '{print $4}')
-A3=$(grep "Address of strref:" .output.txt | awk '{print $4}')
-cat .output.txt | awk '{ if ($NF ~ /^0x[0-9a-fA-F]+$/) $NF=""; print }' | sed 's/  *$//' > .filtered_output.txt
+./violence > .output.txt 2>&1
 cat << EOL > .expected.txt
-Adress of str:
-Adress of strptr:
-Adress of strref:
-
-Value of str: HI THIS IS BRAIN
-Value of strptr: HI THIS IS BRAIN
-Value of strref: HI THIS IS BRAIN
+Test
 EOL
-if (diff -q .filtered_output.txt .expected.txt >> /dev/null 2>&1 && [ "$A1" == "$A2" ] && [ "$A1" == "$A3" ] ); then
+if (diff -q .output.txt .expected.txt >> /dev/null 2>&1); then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 else
-    echo -e "\033[1;33mOutput ref:\033[0m" >> debug.txt
-    cat .filtered_output.txt >> debug.txt
+    echo -e "\033[1;33mOutput violence:\033[0m" >> debug.txt
+    cat .output.txt >> debug.txt
     echo -e "\033[1;33mOutput expected:\033[0m" >> debug.txt
     cat .expected.txt >> debug.txt
     echo -e "\033[1;31mInvalide\033[0m"
@@ -83,13 +73,13 @@ else
 fi
 
 # ---------------------- Tests valgrind ----------------------
-echo -e "\n\033[1;33mRunning valgrind for ex02...\033[0m"
-echo -e "\n\033[1;33mRunning valgrind for ex02...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning valgrind for ex03...\033[0m"
+echo -e "\n\033[1;33mRunning valgrind for ex03...\033[0m" >> debug.txt
 
 # Valgrind Test 1
 echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mValgrind Test 1:\033[0m"
-valgrind --leak-check=full ./ref > .valgrind.txt 2>&1
+valgrind --leak-check=full ./violence > .valgrind.txt 2>&1
 if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
     echo -e "\033[1;32mValide\033[0m"
@@ -116,7 +106,7 @@ else
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 fi
 
-rm -f .make.txt .expected.txt .valgrind.txt .output.txt .filtered_output.txt
+rm -f .make.txt .expected.txt .valgrind.txt .output.txt
 
 if $all_tests_passed; then
     rm -f debug.txt
