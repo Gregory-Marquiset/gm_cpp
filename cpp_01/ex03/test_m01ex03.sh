@@ -57,7 +57,15 @@ echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 1:\033[0m"
 ./violence > .output.txt 2>&1
 cat << EOL > .expected.txt
-Test
+Bob attacks with their crude spiked club
+Bob attacks with their some other type of club
+Bob leave the fight!
+some other type of club is destroy!
+Jim as no weapon!
+Jim attacks with their crude spiked club
+Jim attacks with their some other type of club
+Jim leave the fight!
+some other type of club is destroy!
 EOL
 if (diff -q .output.txt .expected.txt >> /dev/null 2>&1); then
     echo -e "\033[1;32mValide\033[0m"
