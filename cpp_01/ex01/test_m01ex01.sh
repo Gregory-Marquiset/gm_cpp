@@ -49,8 +49,8 @@ else
 fi
 
 # ---------------------- Tests exercice ----------------------
-echo -e "\n\033[1;33m\nRunning tests for ex01...\033[0m" >> debug.txt
-echo -e "\n\033[1;33mRunning tests for ex01...\033[0m"
+echo -e "\n\033[1;33m\nRunning tests...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning tests...\033[0m"
 
 # Test 1
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
@@ -168,8 +168,8 @@ else
 fi
 
 # ---------------------- Tests valgrind ----------------------
-echo -e "\n\033[1;33mRunning valgrind for ex01...\033[0m"
-echo -e "\n\033[1;33mRunning valgrind for ex01...\033[0m" >> debug.txt
+echo -e "\n\033[1;33mRunning valgrind...\033[0m"
+echo -e "\n\033[1;33mRunning valgrind...\033[0m" >> debug.txt
 
 # Valgrind Test 1
 echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
