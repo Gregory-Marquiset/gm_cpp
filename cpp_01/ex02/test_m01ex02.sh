@@ -60,7 +60,7 @@ A1=$(grep "Address of str:" .output.txt | awk '{print $4}')
 A2=$(grep "Address of strptr:" .output.txt | awk '{print $4}')
 A3=$(grep "Address of strref:" .output.txt | awk '{print $4}')
 cat .output.txt | awk '{ if ($NF ~ /^0x[0-9a-fA-F]+$/) $NF=""; print }' | sed 's/  *$//' > .filtered_output.txt
-cat << EOL > .expected.txt
+cat << EOF > .expected.txt 2>&1
 Adress of str:
 Adress of strptr:
 Adress of strref:
@@ -68,7 +68,7 @@ Adress of strref:
 Value of str: HI THIS IS BRAIN
 Value of strptr: HI THIS IS BRAIN
 Value of strref: HI THIS IS BRAIN
-EOL
+EOF
 if (diff -q .filtered_output.txt .expected.txt >> /dev/null 2>&1 && [ "$A1" == "$A2" ] && [ "$A1" == "$A3" ] ); then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt

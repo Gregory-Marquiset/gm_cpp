@@ -56,11 +56,12 @@ echo -e "\n\033[1;33mRunning tests...\033[0m"
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 1:\033[0m"
 ./zombie > .output.txt 2>&1
-echo -n "Heapz: BraiiiiiiinnnzzzZ...
+cat << EOF > .expected.txt 2>&1
+Heapz: BraiiiiiiinnnzzzZ...
 Heapz destroyed.
 Stackz: BraiiiiiiinnnzzzZ...
 Stackz destroyed.
-" > .expected.txt 2>&1
+EOF
 if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt

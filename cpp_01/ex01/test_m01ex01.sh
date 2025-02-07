@@ -56,7 +56,8 @@ echo -e "\n\033[1;33mRunning tests...\033[0m"
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 1:\033[0m"
 ./horde 5 Jackie > .output.txt 2>&1
-echo -n "1 Jackie: BraiiiiiiinnnzzzZ...
+cat << EOF > .expected.txt 2>&1
+1 Jackie: BraiiiiiiinnnzzzZ...
 2 Jackie: BraiiiiiiinnnzzzZ...
 3 Jackie: BraiiiiiiinnnzzzZ...
 4 Jackie: BraiiiiiiinnnzzzZ...
@@ -67,7 +68,7 @@ echo -n "1 Jackie: BraiiiiiiinnnzzzZ...
 3 Jackie is now dead?
 2 Jackie is now dead?
 1 Jackie is now dead?
-" > .expected.txt 2>&1
+EOF
 if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
@@ -85,7 +86,8 @@ fi
 echo -e "\033[1;36mTest 2:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 2:\033[0m"
 ./horde 5 "" > .output.txt 2>&1
-echo -n "1 unnamed: BraiiiiiiinnnzzzZ...
+cat << EOF > .expected.txt 2>&1
+1 unnamed: BraiiiiiiinnnzzzZ...
 2 unnamed: BraiiiiiiinnnzzzZ...
 3 unnamed: BraiiiiiiinnnzzzZ...
 4 unnamed: BraiiiiiiinnnzzzZ...
@@ -96,7 +98,7 @@ echo -n "1 unnamed: BraiiiiiiinnnzzzZ...
 3 unnamed is now dead?
 2 unnamed is now dead?
 1 unnamed is now dead?
-" > .expected.txt 2>&1
+EOF
 if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
@@ -114,8 +116,9 @@ fi
 echo -e "\033[1;36mTest 3:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 3:\033[0m"
 ./horde 0 Jackie > .output.txt 2>&1
-echo -n "Error : argv[1] invalide
-" > .expected.txt 2>&1
+cat << EOF > .expected.txt 2>&1
+Error : argv[1] invalide
+EOF
 if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
@@ -133,8 +136,9 @@ fi
 echo -e "\033[1;36mTest 4:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 4:\033[0m"
 ./horde 5 > .output.txt 2>&1
-echo -n "Error : bad arguments format!
-" > .expected.txt 2>&1
+cat << EOF > .expected.txt 2>&1
+Error : bad arguments format!
+EOF
 if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
@@ -152,8 +156,9 @@ fi
 echo -e "\033[1;36mTest 5:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 5:\033[0m"
 ./horde 2147483647 Jackie > .output.txt 2>&1
-echo -n "Error : allocation imposible for the zombies horde!
-" > .expected.txt 2>&1
+cat << EOF > .expected.txt 2>&1
+Error : allocation imposible for the zombies horde!
+EOF
 if diff -q .output.txt .expected.txt >> /dev/null 2>&1; then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
