@@ -3,10 +3,6 @@
 
 # include <iostream>
 
-/*
-
-*/
-
 class	Fixed
 {
 	private:
