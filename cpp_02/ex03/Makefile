@@ -1,7 +1,9 @@
 SRCS = srcs/main.cpp \
-	srcs/Fixed.cpp
+	srcs/Fixed.cpp \
+	srcs/Point.cpp \
+	srcs/bsp.cpp
 INCLUDES = -Iincludes
-NAME = fixed2
+NAME = bsp
 CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MMD -MP
 RM = rm -rf

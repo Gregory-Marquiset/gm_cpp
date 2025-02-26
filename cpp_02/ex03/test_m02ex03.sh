@@ -55,30 +55,20 @@ echo -e "\n\033[1;33mRunning tests...\033[0m"
 # Test 1
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 1:\033[0m"
-./fixed1 > .output.txt 2>&1
+./bsp > .output.txt 2>&1
 cat << EOF > .expected.txt 2>&1
-Default constructor called
-Copy constructor called
-Copy assignment operator called
-getRawBits member function called
-Default constructor called
-Copy assignment operator called
-getRawBits member function called
-getRawBits member function called
-0
-getRawBits member function called
-0
-getRawBits member function called
-0
-Destructor called
-Destructor called
-Destructor called
+Is p1 inside? Yes
+Is p2 inside? No
+Is p3 inside? No
+Is p4 inside? No
+Is p5 inside? No
+Is p6 inside? Yes
 EOF
 if (diff -q .expected.txt .output.txt >> /dev/null 2>&1); then
     echo -e "\033[1;32mValide\033[0m"
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 else
-    echo -e "\033[1;33mOutput fixed:\033[0m" >> debug.txt
+    echo -e "\033[1;33mOutput bsp:\033[0m" >> debug.txt
     cat .output.txt >> debug.txt
     echo -e "\033[1;33mOutput .expected:\033[0m" >> debug.txt
     cat .expected.txt >> debug.txt
@@ -94,7 +84,7 @@ echo -e "\n\033[1;33mRunning valgrind...\033[0m" >> debug.txt
 # Valgrind Test 1
 echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mValgrind Test 1:\033[0m"
-valgrind --leak-check=full ./fixed1 > .valgrind.txt 2>&1
+valgrind --leak-check=full ./bsp > .valgrind.txt 2>&1
 if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
     echo -e "\033[1;32mValide\033[0m"

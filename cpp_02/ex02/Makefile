@@ -1,7 +1,7 @@
 SRCS = srcs/main.cpp \
 	srcs/Fixed.cpp
 INCLUDES = -Iincludes
-NAME = fixed2
+NAME = fixed3
 CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MMD -MP
 RM = rm -rf

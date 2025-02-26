@@ -55,7 +55,7 @@ echo -e "\n\033[1;33mRunning tests...\033[0m"
 # Test 1
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 1:\033[0m"
-./fixed > .output.txt 2>&1
+./fixed2 > .output.txt 2>&1
 cat << EOF > .expected.txt 2>&1
 Default constructor called
 Int constructor called
@@ -98,7 +98,7 @@ echo -e "\n\033[1;33mRunning valgrind...\033[0m" >> debug.txt
 # Valgrind Test 1
 echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mValgrind Test 1:\033[0m"
-valgrind --leak-check=full ./fixed > .valgrind.txt 2>&1
+valgrind --leak-check=full ./fixed2 > .valgrind.txt 2>&1
 if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
     echo -e "\033[1;32mValide\033[0m"
@@ -125,7 +125,7 @@ else
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
 fi
 
-rm -f .make.txt .valgrind.txt .expected.txt .output.txt .test.txt .test.txt.replace
+rm -f .make.txt .valgrind.txt .expected.txt .output.txt
 
 if $all_tests_passed; then
     rm -f debug.txt

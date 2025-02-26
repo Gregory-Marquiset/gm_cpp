@@ -1,8 +1,8 @@
 SRCS = srcs/main.cpp \
 	srcs/Fixed.cpp
 INCLUDES = -Iincludes
-NAME = fixed
-CC = c++
+NAME = fixed1
+CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MMD -MP
 RM = rm -rf
 MK = mkdir -p
@@ -24,11 +24,11 @@ all: $(NAME)
 $(OBJ_DIR)%.o: %.cpp
 	@echo "$(YELLOW)Compiling $(RESET)$(CYAN)$<$(RESET)..."
 	@$(MK) $(dir $@) $(DEP_DIR)$(dir $<)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MMD -MF $(DEP_DIR)$*.d
+	$(CXX) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MMD -MF $(DEP_DIR)$*.d
 
 $(NAME): $(OBJ_PREF)
 	@echo "$(YELLOW)Linking $(CYAN)$(NAME)$(RESET)..."
-	$(CC) $(CFLAGS) $(OBJ_PREF) -o $(NAME)
+	$(CXX) $(CFLAGS) $(OBJ_PREF) -o $(NAME)
 	@echo "$(GREEN)Executable $(CYAN)$(NAME)$(GREEN) successfully created!$(RESET)"
 
 

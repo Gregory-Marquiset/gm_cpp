@@ -55,24 +55,15 @@ echo -e "\n\033[1;33mRunning tests...\033[0m"
 # Test 1
 echo -e "\033[1;36mTest 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mTest 1:\033[0m"
-./fixed1 > .output.txt 2>&1
+./fixed3 > .output.txt 2>&1
 cat << EOF > .expected.txt 2>&1
-Default constructor called
-Copy constructor called
-Copy assignment operator called
-getRawBits member function called
-Default constructor called
-Copy assignment operator called
-getRawBits member function called
-getRawBits member function called
 0
-getRawBits member function called
-0
-getRawBits member function called
-0
-Destructor called
-Destructor called
-Destructor called
+0.00390625
+0.00390625
+0.00390625
+0.0078125
+10.1016
+10.1016
 EOF
 if (diff -q .expected.txt .output.txt >> /dev/null 2>&1); then
     echo -e "\033[1;32mValide\033[0m"
@@ -94,7 +85,7 @@ echo -e "\n\033[1;33mRunning valgrind...\033[0m" >> debug.txt
 # Valgrind Test 1
 echo -e "\033[1;36mValgrind Test 1:\033[0m" >> debug.txt
 echo -e "\033[1;36mValgrind Test 1:\033[0m"
-valgrind --leak-check=full ./fixed1 > .valgrind.txt 2>&1
+valgrind --leak-check=full ./fixed3 > .valgrind.txt 2>&1
 if grep -q "ERROR SUMMARY: 0 errors" .valgrind.txt; then
     echo -e "\033[1;32mValide\033[0m" >> debug.txt
     echo -e "\033[1;32mValide\033[0m"
