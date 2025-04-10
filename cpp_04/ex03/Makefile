@@ -1,5 +1,7 @@
 SRCS = srcs/main.cpp \
-		srcs/Character.cpp
+		srcs/Character.cpp \
+		srcs/AMateria.cpp \
+		srcs/Ice.cpp
 INCLUDES = -Iincludes
 NAME = AMateria
 CXX = c++

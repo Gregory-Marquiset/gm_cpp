@@ -1,0 +1,45 @@
+[1;33mRunning Makefile commands...[0m
+[1;36mRunning make...[0m
+[1;32mValide[0m
+[1;36mRunning make clean...[0m
+[1;32mValide[0m
+[1;36mRunning make re...[0m
+[1;32mValide[0m
+
+[1;33m
+Running tests...[0m
+[1;36mTest 1:[0m
+[1;33mOutput ClapTrap:[0m
+ClapTrap constructor called and named: CL4P-TP
+ClapTrap CL4P-TP attacks CL4P-TP22, causing 0 points of damage!
+ClapTrap CL4P-TP take 10 points of damage!
+ClapTrap CL4P-TP hase no HP left.
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP attacks CL4P-TP22, causing 0 points of damage!
+Claptrap CL4P-TP destructor called
+[1;33mOutput .expected:[0m
+ClapTrap constructor called and named: CL4P-TP
+ClapTrap CL4P-TP attacks CL4P-TP22, causing 0 points of damage!
+ClapTrap CL4P-TP take 5 points of damage!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap CL4P-TP self repaire 5 to his HP!
+ClapTrap hase no EP left.
+Claptrap CL4P-TP destructor called
+[1;31mInvalide
+[0m
+
+[1;33mRunning valgrind...[0m
+[1;36mValgrind Test 1:[0m
+[1;32mValide[0m
+
+[1;33mRunning Makefile commands...[0m
+[1;36mRunning make fclean...[0m
+[1;32mValide[0m

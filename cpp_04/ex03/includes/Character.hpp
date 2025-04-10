@@ -4,6 +4,7 @@
 
 //#include <../includes/ICharacter.hpp>
 #include <iostream>
+#include "AMateria.hpp"
 
 /*
 Le Character a un inventaire de 4 items, soit 4 Materias maximum.
@@ -30,13 +31,17 @@ class	Character //: public	ICharacter
 {
 	private:
 		std::string	_name;
-		//AMateria*	_inventory[4];
+		AMateria*	_inventory[4];
 	public:
-			Character();
-			Character( const Character& other );
-			Character( const std::string& name );
-			~Character();
+				Character();
+				Character( const Character& other );
+				Character( const std::string& name );
+				~Character();
 
+	const std::string&	getName() const;
+	void				setName( const std::string& name );
+	void				showInventory() const;
+	void				equip( const AMateria& newMateria );
 	//void	unequip();
 	//void	use( int i, ICharacter& chara );
 };
