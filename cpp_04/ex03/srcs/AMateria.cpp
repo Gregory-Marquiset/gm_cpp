@@ -19,19 +19,18 @@ class	AMateria
 
 AMateria::AMateria( void )
 {
-    std::cout << "AMateria constructeur" << std::endl;
+    std::cout << "AMateria constructor" << std::endl;
     _type = "Basique";
 }
 
-AMateria::AMateria( const std::string& type )
+AMateria::AMateria( const std::string& type ) : _type( type )
 {
     std::cout << "AMateria constructor type" << std::endl;
-    _type = type;
 }
 
 AMateria::~AMateria( void )
 {
-    std::cout << "AMateria destructeur" << std::endl;
+    std::cout << "AMateria destructor" << std::endl;
 }
 
 void    AMateria::setType( const std::string& type )

@@ -10,7 +10,7 @@ class	AMateria
 	public:
 		AMateria();
 		AMateria( const std::string& type );
-		~AMateria();
+		virtual ~AMateria();
 
 		void				setType( const std::string& type );
 		const std::string&	getType() const; //Returns the materia type

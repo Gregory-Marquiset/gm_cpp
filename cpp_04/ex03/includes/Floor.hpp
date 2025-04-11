@@ -7,7 +7,7 @@
 class Floor
 {
 	private:
-		AMateria*	_inventory;
+		AMateria**	_inventory;
 		int			_index;
 	public:
 		Floor();
@@ -15,7 +15,7 @@ class Floor
 		~Floor();
 		Floor&	operator=( const Floor& other );
 		
-		void	addMateria( AMateria& newMateria );
+		void	addMateria( AMateria* newMateria );
 };
 
 #endif // CHEST_HPP

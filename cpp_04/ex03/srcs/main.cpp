@@ -2,6 +2,8 @@
 # include "../includes/Character.hpp"
 # include "../includes/AMateria.hpp"
 # include "../includes/Ice.hpp"
+# include "../includes/Cure.hpp"
+# include "../includes/Floor.hpp"
 
 int	main()
 {
@@ -21,12 +23,28 @@ int	main()
 	// delete me;
 	// delete src;
 
-	Character	chara;
-	std::cout << chara.getName() << std::endl;
-	Ice			ice;
-	std::cout << ice.getType() << std::endl;
-	chara.equip( ice );
-	chara.showInventory();
-	
+	//Floor		floor;
+	Character	A( "A" );
+	Character	B( "B" );
+
+	// A.setFloor( &floor );
+	// B.setFloor( &floor );
+
+	Ice		ice;
+	Ice		ice2( ice );
+	Cure	cure;
+	Cure	cure2( cure );
+	// A.equip( ice );
+	// A.equip( cure );
+	// A.equip( ice );
+	// A.equip( cure );
+	// A.equip( ice );
+	A.showInventory();
+	A.unequip( 1 );
+	// B.equip( ice );
+	// B.equip( cure );
+	// B.unequip( 1 );
+	// B.showInventory();
+
 	return (0);
 }

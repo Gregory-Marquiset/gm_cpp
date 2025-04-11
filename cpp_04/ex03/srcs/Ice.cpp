@@ -13,27 +13,24 @@ class	Ice
 };
 */
 
-Ice::Ice( void ) : AMateria::AMateria( "Ice" )
+Ice::Ice( void ) : AMateria::AMateria( "ice" ), _type( "ice" )
 {
-	std::cout << "Ice constructeur" << std::endl;
-	//_type = "Ice";
+	std::cout << _type << " constructeur" << std::endl;
 }
 
-Ice::Ice( const Ice& other ) : AMateria::AMateria( other )
+Ice::Ice( const Ice& other ) : AMateria::AMateria( other ), _type( other._type )
 {
-	std::cout << "Ice constructeur copy" << std::endl;
-	_type = other._type;
+	std::cout << _type << " constructeur copy" << std::endl;
 }
 
-Ice::Ice( const std::string& type ) : AMateria::AMateria( type )
+Ice::Ice( const std::string& type ) : AMateria::AMateria( type ), _type( type )
 {
-	std::cout << "Ice constructeur type" << std::endl;
-	_type = type;
+	std::cout << _type << " constructeur type" << std::endl;
 }
 
 Ice::~Ice( void )
 {
-	std::cout << "Ice destructor" << std::endl;
+	std::cout << _type << " destructor" << std::endl;
 }
 
 AMateria*	Ice::clone( void ) const
