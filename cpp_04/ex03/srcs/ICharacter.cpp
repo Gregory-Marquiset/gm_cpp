@@ -1,2 +1,0 @@
-
-#include "../includes/ICharacter.hpp"
