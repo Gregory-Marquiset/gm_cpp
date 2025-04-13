@@ -3,8 +3,8 @@
 # ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include <../includes/ICharacter.hpp>
-#include "../includes/Floor.hpp"
+#include "interface/ICharacter.hpp"
+#include "Floor.hpp"
 
 class	Character : public	ICharacter
 {

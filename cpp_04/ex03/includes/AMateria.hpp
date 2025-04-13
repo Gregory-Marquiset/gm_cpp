@@ -3,9 +3,8 @@
 # ifndef AMATERIA_HPP
 #define AMATERIA_HPP
 
-#include "IMateriaSource.hpp"
-
-class	ICharacter;
+#include "interface/IMateriaSource.hpp"
+#include "interface/ICharacter.hpp"
 
 class	AMateria
 {
@@ -17,10 +16,6 @@ class	AMateria
 		AMateria( const std::string& type );
 		virtual ~AMateria();
 		AMateria&	operator=( const AMateria& other );
-
-		//-------> IMateriaSource interface <-------//
-		void		learnMateria( AMateria* );
-		AMateria*	createMateria( const std::string& type );
 
 		//-------> Self methode <-------//
 		void				setType( const std::string& type );

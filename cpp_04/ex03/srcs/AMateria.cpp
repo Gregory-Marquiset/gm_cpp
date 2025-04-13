@@ -51,16 +51,11 @@ AMateria&	AMateria::operator=( const AMateria& other )
 	std::cout	<< "AMateria copy assignment operator called"
 				<< std::endl;
 
-	_type = other.getType();
+	if ( this != &other )
+		_type = other.getType();
+
+	return ( *this );
 }
-
-//-------> IMateriaSource interface <-------//
-
-void		AMateria::learnMateria( AMateria* )
-{}
-
-AMateria*	AMateria::createMateria( const std::string& type )
-{}
 
 //-------> Self methode <-------//
 
@@ -75,4 +70,7 @@ const std::string& AMateria::getType( void ) const
 }
 
 void		AMateria::use( ICharacter& target )
-{}
+{
+    std::cout	<< "* Neutral force applied on " << target.getName()
+				<< " *" << std::endl;
+}

@@ -1,21 +1,24 @@
+//-------> ./includes.Cure.hpp <-------//
 
 # ifndef CURE_HPP
 #define CURE_HPP
 
-#include <iostream>
 #include "AMateria.hpp"
 
-class   Cure : public AMateria
+class	Cure : public AMateria
 {
-    private:
-        std::string    _type;
-    public:
-        Cure();
-        Cure( const Cure& other );
-        Cure ( const std::string& type );
-        ~Cure();
+	public:
+		Cure();
+		Cure( const Cure& other );
+		Cure ( const std::string& type );
+		~Cure();
+		Cure&	operator=( const Cure& other );
 
-        AMateria*   clone() const;
+		//-------> AMateria methode <-------//
+		AMateria*	clone( void ) const;
+		void		use( ICharacter& target );
+
+		//-------> Self methode <-------//
 };
 
-#endif //CURE_HPP
+#endif // CURE_HPP

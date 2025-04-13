@@ -1,23 +1,24 @@
+//-------> ./includes.Ice.hpp <-------//
+
 # ifndef ICE_HPP
 #define ICE_HPP
 
-#include <iostream>
 #include "AMateria.hpp"
-#include "ICharacter.hpp"
 
 class	Ice : public AMateria
 {
-	private:
-		std::string		_type;
 	public:
 		Ice();
-		Ice( const Ice& other);
-		Ice( const std::string& type);
+		Ice( const Ice& other );
+		Ice( const std::string& type );
 		~Ice();
+		Ice&	operator=( const Ice& other );
 
-		AMateria*	clone() const;
-		void		Ice::use( ICharacter& target )
+		//-------> AMateria methode <-------//
+		AMateria*	clone( void ) const;
+		void		use( ICharacter& target );
 
+		//-------> Self methode <-------//
 };
 
-#endif //ICE_HPP
+#endif // ICE_HPP
