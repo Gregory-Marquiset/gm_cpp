@@ -1,52 +1,56 @@
+//-------> ./srcs.Cat.cpp <-------//
+
 # include "../includes/Cat.hpp"
 
-Cat::Cat( void ) : Animal()
+/*
+class Cat : public Animal
+{
+	public:
+		Cat();
+		Cat( const Cat& copy );
+		~Cat();
+		Cat&	operator=( const Cat& other );
+
+		//-------> Animal methode <-------//
+		void		makeSound() const;
+};
+*/
+
+Cat::Cat() : Animal()
 {
 	_type = "Cat";
-	std::cout << "Default constructor for Cat as been called"
-			  << std::endl;
+	std::cout	<< "Default constructor for Cat as been called"
+				<< std::endl;
 }
 
-Cat::Cat( const Cat& copy ) : Animal( copy)
+Cat::Cat( const Cat& other ) : Animal( other )
 {
-	*this = copy;
-	std::cout << "Copy constructor for Cat as been called"
-			  << std::endl;
+	*this = other;
+	std::cout	<< "Copy constructor for Cat as been called"
+				<< std::endl;
 }
 
-Cat::~Cat( void )
+Cat::~Cat()
 {
-	std::cout << "Destructor for Cat as been called"
-			  << std::endl;
+	std::cout	<< "Destructor for Cat as been called"
+				<< std::endl;
 }
 
 Cat&	Cat::operator=( const Cat& other )
 {
-	std::cout << "Copy assignment operator called"
-			  << std::endl;
+	std::cout	<< "Copy assignment operator called"
+				<< std::endl;
 	if (this != &other)
 	{
 		_type = other.getType();
-		_sound = other.getSound();
 	}
 	return( *this );
 }
 
-void	Cat::makeSound( void ) const
-{
-	std::cout << "This "
-			  << _type
-			  << " make a "
-			  << _sound
-			  << std::endl;
-}
+//-------> Animal methode <-------//
 
-void	Cat::setSound( std::string sound )
+void	Cat::makeSound() const
 {
-	_sound = sound;
-}
-
-std::string	Cat::getSound( void ) const
-{
-	return ( _sound );
+	std::cout	<< "This " << _type << " make a Miaou"
+				<< std::endl;
 }

@@ -4,14 +4,15 @@
 #define CHARACTER_HPP
 
 #include "interface/ICharacter.hpp"
-#include "Floor.hpp"
+#include "AMateria.hpp"
 
 class	Character : public	ICharacter
 {
 	private:
 		std::string	_name;
 		AMateria*	_inventory[4];
-		Floor*		_floor;
+		int			_index;
+		AMateria**	_floor;
 	public:
 		Character();
 		Character( const Character& other );
@@ -23,12 +24,10 @@ class	Character : public	ICharacter
 		const std::string&	getName() const;
 		void				equip( AMateria* m );
 		void				unequip( int idx );
-		void				use( int idx, ICharacter& target ) const;	
+		void				use( int idx, ICharacter& target );
 
 		//-------> Self methode <-------//
 		void				setName( const std::string& name );
-		void				setFloor( Floor* floor );
-		Floor*				getFloor( void ) const;
 		void				showInventory( void ) const;
 };
 

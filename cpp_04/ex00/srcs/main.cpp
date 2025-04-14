@@ -1,26 +1,22 @@
+//-------> ./srcs.Main.cpp <-------//
+
 # include "../includes/Cat.hpp"
 # include "../includes/Dog.hpp"
 
-int	main( void )
+int	main()
 {
-	Animal	Ani1;
-	Cat		Cat1;
+	Animal	h;
+	const Animal*	j = new Dog();
+	const Animal*	i = new Cat();
 
-	Cat1.setSound( "Miaou" );
+	std::cout	<< h.getType() << std::endl;
+	h.makeSound();
+	std::cout	<< j->getType() << std::endl;
+	j->makeSound();
+	std::cout	<< i->getType() << std::endl;
+	i->makeSound();
 
-	Cat		Cat2( Cat1 );
-
-	Ani1.makeSound();
-	Cat1.makeSound();
-	Cat2.makeSound();
-
-	Dog		Dog1;
-
-	Dog1.setSound( "Waaf" );
-
-	Dog		Dog2( Dog1 );
-
-	Dog1.makeSound();
-	Dog2.makeSound();
-	return (0);
+	delete j;
+	delete i;
+	return ( 0 );
 }

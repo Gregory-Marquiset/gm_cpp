@@ -1,3 +1,5 @@
+//-------> ./includes/Dog.hpp <-------//
+
 # ifndef DOG_HPP
 #define DOG_HPP
 
@@ -5,20 +7,19 @@
 
 class Dog : public Animal
 {
-	protected:
-		std::string	_sound;
+	private:
 		Brain*		_brain;
 	public:
 		Dog();
 		Dog( const Dog& copy );
 		~Dog();
-
 		Dog&	operator=( const Dog& other );
 
-		void		setSound( std::string sound );
-		std::string	getSound( void ) const;
-		void		makeSound( void ) const;
-		Brain*		getBrain() const;
+		//-------> Animal methode <-------//
+		void		makeSound() const;
+
+		//-------> Self methode <-------//
+		Brain*	getBrain() const;
 };
 
-#endif	//DOG_HPP
+#endif	// DOG_HPP

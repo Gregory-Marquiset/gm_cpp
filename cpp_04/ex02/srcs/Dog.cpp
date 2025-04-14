@@ -1,63 +1,68 @@
+//-------> ./srcs/Dog.cpp <-------//
+
 # include "../includes/Dog.hpp"
 
-Dog::Dog( void )
+/*
+class Dog : public Animal
+{
+	protected:
+		Brain*		_brain;
+	public:
+		Dog();
+		Dog( const Dog& copy );
+		~Dog();
+		Dog&	operator=( const Dog& other );
+
+		//-------> Animal methode <-------//
+		void		makeSound() const;
+};
+*/
+
+Dog::Dog() : Animal()
 {
 	_type = "Dog";
 	_brain = new Brain();
-	_sound = "Waaf";
-	std::cout << "Default constructor for Dog as been called"
-			  << std::endl;
+	std::cout	<< "Default constructor for Dog as been called"
+				<< std::endl;
 }
 
-Dog::Dog( const Dog& copy ) : Animal( copy )
+Dog::Dog( const Dog& other ) : Animal( other )
 {
-	*this = copy;
-	_brain = new Brain( *copy._brain );
-	_sound = copy._sound;
-	std::cout << "Copy constructor for Dog as been called"
-			  << std::endl;
+	*this = other;
+	std::cout	<< "Copy constructor for Dog as been called"
+				<< std::endl;
 }
 
-Dog::~Dog( void )
+Dog::~Dog()
 {
-	delete	_brain;
-	std::cout << "Destructor for Dog as been called"
-			  << std::endl;
+	delete _brain;
+	std::cout	<< "Destructor for Dog as been called"
+				<< std::endl;
 }
 
 Dog&	Dog::operator=( const Dog& other )
 {
-	std::cout << "Copy assignment operator called"
-			  << std::endl;
+	std::cout	<< "Copy assignment operator called"
+				<< std::endl;
 	if ( this != &other )
 	{
-		Animal::operator=( other );
-		delete _brain;
-		_brain = new Brain( *other._brain );
 		_type = other.getType();
-		_sound = other.getSound();
+		_brain = new Brain();
+		for ( int i = 0; i < 100;i++ )
+			_brain->setIdea( i, other._brain->getIdea( i ) );
 	}
 	return ( *this );
 }
 
-void		Dog::setSound( std::string sound )
+//-------> Animal methode <-------//
+
+void		Dog::makeSound() const
 {
-	_sound = sound;
+	std::cout	<< "This " << _type << " make a Waaf"
+				<< std::endl;
 }
 
-std::string	Dog::getSound( void ) const
-{
-	return ( _sound );
-}
-
-void		Dog::makeSound( void ) const
-{
-	std::cout << "This "
-			  << _type
-			  << " make a "
-			  << _sound
-			  << std::endl;
-}
+//-------> Self methode <-------//
 
 Brain*	Dog::getBrain() const
 {

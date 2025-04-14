@@ -1,3 +1,5 @@
+//-------> ./includes/Animal.hpp <-------//
+
 # ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
@@ -12,11 +14,11 @@ class Animal
 		Animal();
 		Animal( const Animal& copy );
 		virtual	~Animal();
-
 		Animal&	operator=( const Animal& other );
 
+		//-------> Self methode <-------//
 		std::string		getType() const;
 		virtual void	makeSound() const;
 };
 
-#endif	//ANIMAL_HPP
+#endif	// ANIMAL_HPP

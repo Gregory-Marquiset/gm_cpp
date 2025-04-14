@@ -1,60 +1,71 @@
+//-------> ./srcs/Cat.cpp <-------//
+
 # include "../includes/Cat.hpp"
 
-Cat::Cat( void ) : Animal()
+/*
+class Cat : public Animal
 {
-	_type = "Cat";
+	protected:
+		Brain*		_brain;
+	public:
+		Cat();
+		Cat( const Cat& copy );
+		~Cat();
+		Cat&	operator=( const Cat& other );
+
+		//-------> Animal methode <-------//
+		void		makeSound() const;
+
+		//-------> Self methode <-------//
+		Brain*	Cat::getBrain() const;
+};
+*/
+
+Cat::Cat() : Animal()
+{
 	_brain = new Brain();
-	_sound = "Miaou";
-	std::cout << "Default constructor for Cat as been called"
-			  << std::endl;
+	_type = "Cat";
+	std::cout	<< "Default constructor for Cat as been called"
+				<< std::endl;
 }
 
-Cat::Cat( const Cat& copy ) : Animal( copy)
+Cat::Cat( const Cat& other ) : Animal( other )
 {
-	*this = copy;
-	_brain = new Brain( *copy._brain );
-	_sound = copy._sound;
-	std::cout << "Copy constructor for Cat as been called"
-			  << std::endl;
+	*this = other;
+	std::cout	<< "Copy constructor for Cat as been called"
+				<< std::endl;
 }
 
-Cat::~Cat( void )
+Cat::~Cat()
 {
-	delete	_brain;
-	std::cout << "Destructor for Cat as been called"
-			  << std::endl;
+	delete _brain;
+	std::cout	<< "Destructor for Cat as been called"
+				<< std::endl;
 }
 
 Cat&	Cat::operator=( const Cat& other )
 {
-	std::cout << "Copy assignment operator called"
-			  << std::endl;
+	std::cout	<< "Copy assignment operator called"
+				<< std::endl;
 	if (this != &other)
 	{
 		_type = other.getType();
-		_sound = other.getSound();
+		_brain = new Brain();
+		for ( int i = 0; i < 100 ; i++ )
+			_brain->setIdea( i, other._brain->getIdea(i) );
 	}
 	return( *this );
 }
 
-void	Cat::makeSound( void ) const
+//-------> Animal methode <-------//
+
+void	Cat::makeSound() const
 {
-	std::cout << "This "
-			  << _type
-			  << " make a "
-			  << _sound
-			  << std::endl;
+	std::cout	<< "This " << _type << " make a Miaou"
+				<< std::endl;
 }
 
-void	Cat::setSound( std::string sound )
-{
-	_sound = sound;
-}
-
-std::string	Cat::getSound( void ) const
-{
-	return ( _sound );
-}
+//-------> Self methode <-------//
 
 Brain*	Cat::getBrain() const
 {

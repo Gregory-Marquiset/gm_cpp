@@ -1,3 +1,5 @@
+//-------> ./includes/Cat.hpp <-------//
+
 # ifndef CAT_HPP
 #define CAT_HPP
 
@@ -5,20 +7,19 @@
 
 class Cat : public Animal
 {
-	protected:
-		std::string	_sound;
+	private:
 		Brain*		_brain;
 	public:
 		Cat();
 		Cat( const Cat& copy );
 		~Cat();
+		Cat&	operator=( const Cat& other );
 
-		Cat& operator=( const Cat& other );
-
-		void		setSound( std::string sound );
-		std::string	getSound() const;
+		//-------> Animal methode <-------//
 		void		makeSound() const;
-		Brain*		getBrain() const;
+
+		//-------> Self methode <-------//
+		Brain*	getBrain() const;
 };
 
-#endif	//CAT_HPP
+#endif	// CAT_HPP

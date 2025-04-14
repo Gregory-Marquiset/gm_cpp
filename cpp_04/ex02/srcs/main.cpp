@@ -1,43 +1,58 @@
-# include "../includes/Cat.hpp"
-# include "../includes/Dog.hpp"
+//-------> ./srcs/main.cpp <-------//
+
+#include "../includes/Cat.hpp"
+#include "../includes/Dog.hpp"
 
 int	main()
 {
-	const int	n = 4;
-	Animal*		animals[n];
+	std::cout << "\n--- Création du tableau d'animaux ---\n" << std::endl;
+	const int N = 4;
+	Animal* animals[N];
 
-	std::cout << "\n--- Creating Cats and Dogs ---\n" << std::endl;
-	for ( int i = 0; i < n; i++ )
+	for (int i = 0; i < N; i++)
 	{
 		if (i % 2 == 0)
-			animals[i] = new Cat();
-		else
 			animals[i] = new Dog();
+		else
+			animals[i] = new Cat();
 	}
 
-	std::cout << "\n--- Making Sounds ---\n" << std::endl;
-	for ( int i = 0; i < n; i++ )
-		animals[i]->makeSound();
+	std::cout << "\n--- Ajout d'idées dans les cerveaux ---\n" << std::endl;
+	for (int i = 0; i < N; i++)
+	{
+		if (Dog* d = dynamic_cast<Dog*>(animals[i]))
+			d->getBrain()->setIdea(0, "Protéger la maison");
+		else if (Cat* c = dynamic_cast<Cat*>(animals[i]))
+			c->getBrain()->setIdea(0, "Voler du poisson");
 
-	std::cout << "\n--- Deleting Animals ---\n" << std::endl;
-	for ( int i = 0; i < n; i++ )
+		std::cout << animals[i]->getType() << " pense à : ";
+		if (Dog* d = dynamic_cast<Dog*>(animals[i]))
+			std::cout << d->getBrain()->getIdea(0) << std::endl;
+		else if (Cat* c = dynamic_cast<Cat*>(animals[i]))
+			std::cout << c->getBrain()->getIdea(0) << std::endl;
+	}
+
+	std::cout << "\n--- Destruction du tableau d'animaux ---\n" << std::endl;
+	for (int i = 0; i < N; i++)
 		delete animals[i];
 
-	std::cout << "\n--- Deep Copy Brain Test ---\n" << std::endl;
-	Cat	cat1;
-	cat1.getBrain()->setIdea( 0, "Je veux dormir" );
-	cat1.getBrain()->setIdea( 1, "Je veux manger" );
+	std::cout << "\n--- Test de deep copy ---\n" << std::endl;
 
-	Cat cat2( cat1 );
-	cat2.setSound( "Miiiiiiaou" );
+	Cat cat1;
+	cat1.getBrain()->setIdea(0, "Dormir");
+	cat1.getBrain()->setIdea(1, "Chasser les souris");
 
-	cat1.getBrain()->setIdea( 0, "Je veux grimper" );
+	Cat cat2(cat1);
 
-	std::cout << "\ncat1 sound: " << cat1.getSound() << std::endl;
-	std::cout << "cat2 sound: " << cat2.getSound() << std::endl;
+	std::cout << "cat1 Brain[0]: " << cat1.getBrain()->getIdea(0) << std::endl;
+	std::cout << "cat2 Brain[0]: " << cat2.getBrain()->getIdea(0) << std::endl;
 
-	std::cout << "\ncat1 idea[0]: " << cat1.getBrain()->getIdea( 0 ) << std::endl;
-	std::cout << "cat2 idea[0]: " << cat2.getBrain()->getIdea( 0 ) << std::endl << std::endl;
+	cat1.getBrain()->setIdea(0, "Manger");
 
+	std::cout << "\nAprès modification de cat1 :" << std::endl;
+	std::cout << "cat1 Brain[0]: " << cat1.getBrain()->getIdea(0) << std::endl;
+	std::cout << "cat2 Brain[0]: " << cat2.getBrain()->getIdea(0) << std::endl;
+
+	std::cout << "\n--- Fin du programme ---\n" << std::endl;
 	return ( 0 );
 }

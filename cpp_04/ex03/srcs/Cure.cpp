@@ -15,8 +15,6 @@ class	Cure : public AMateria
 		//-------> AMateria methode <-------//
 		AMateria*	clone( void ) const;
 		void		use( ICharacter& target );
-
-		//-------> Self methode <-------//
 };
 */
 
@@ -63,5 +61,3 @@ void		Cure::use( ICharacter& target )
 	std::cout	<< "* Call a cure on " << target.getName()
 				<< " *" << std::endl;
 }
-
-//-------> Self methode <-------//

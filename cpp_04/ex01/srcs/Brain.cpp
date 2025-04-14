@@ -1,35 +1,56 @@
+//-------> ./srcs/Brain.cpp <-------//
+
 # include "../includes/Brain.hpp"
 
-Brain::Brain( void )
+/*
+class	Brain
 {
-	std::cout << "Default constructor for Brain as been called"
-			  << std::endl;
+	private:
+		std::string	ideas[100];
+	public:
+		Brain();
+		Brain( const Brain& copy );
+		~Brain();
+		Brain&	operator=( const Brain& other );
+
+		//-------> Self methode <-------//
+		std::string	getIdea( int i ) const;
+		void		setIdea( int i, std::string idea );
+};
+*/
+
+Brain::Brain()
+{
+	std::cout	<< "Default constructor for Brain as been called"
+				<< std::endl;
 }
 
 Brain::Brain( const Brain& copy )
 {
 	*this = copy;
-	std::cout << "Copy constructor for Brain as been called"
-			  << std::endl;
+	std::cout	<< "Copy constructor for Brain as been called"
+				<< std::endl;
 }
 
-Brain::~Brain( void )
+Brain::~Brain()
 {
-	std::cout << "Destructor for Brain as been called"
-			  << std::endl;
+	std::cout	<< "Destructor for Brain as been called"
+				<< std::endl;
 }
 
 Brain&	Brain::operator=( const Brain& other )
 {
-	std::cout << "Copy assignment operator called"
-			  << std::endl;
+	std::cout	<< "Copy assignment operator called"
+				<< std::endl;
 	if ( this != &other )
 	{
 		for ( int i = 0; i < 100; i++ )
-			ideas[i] = other.ideas[i];
+			setIdea( i, other.getIdea( i ) );
 	}
 	return( *this );
 }
+
+//-------> Self methode <-------//
 
 std::string Brain::getIdea( int i ) const
 {

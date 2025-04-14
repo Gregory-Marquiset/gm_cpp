@@ -19,8 +19,6 @@ class	MateriaSource : public IMateriaSource
 		//-------> IMateriaSource interface <-------//
 		void		learnMateria( AMateria* );
 		AMateria*	createMateria( const std::string& type );
-
-		//-------> Self methode <-------//
 };
 
 

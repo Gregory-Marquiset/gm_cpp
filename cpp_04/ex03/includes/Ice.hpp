@@ -17,8 +17,6 @@ class	Ice : public AMateria
 		//-------> AMateria methode <-------//
 		AMateria*	clone( void ) const;
 		void		use( ICharacter& target );
-
-		//-------> Self methode <-------//
 };
 
 #endif // ICE_HPP

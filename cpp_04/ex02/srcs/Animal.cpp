@@ -1,29 +1,46 @@
+//-------> ./includes/Animal.hpp <-------//
+
 # include "../includes/Animal.hpp"
 
-Animal::Animal( void )
+/*
+class Animal
 {
-	_type = "Animal";
-	std::cout << "Default constructor for Animal as been called"
-			  << std::endl;
+	protected:
+		std::string	_type;
+	public:
+		Animal();
+		Animal( const Animal& copy );
+		virtual	~Animal();
+		Animal&	operator=( const Animal& other );
+
+		std::string		getType() const;
+		virtual void	makeSound() const = 0;
+};
+*/
+
+Animal::Animal() : _type( "Animal" )
+{
+	std::cout	<< "Default constructor for Animal as been called"
+				<< std::endl;
 }
 
-Animal::Animal( const Animal& copy )
+Animal::Animal( const Animal& other )
 {
-	_type = copy._type;
-	std::cout << "Copy constructor for Animal as been called"
-			  << std::endl;
+	*this = other;
+	std::cout	<< "Copy constructor for Animal as been called"
+				<< std::endl;
 }
 
-Animal::~Animal( void )
+Animal::~Animal()
 {
-	std::cout << "Destructor for Animal as been called"
-			  << std::endl;
+	std::cout	<< "Destructor for Animal as been called"
+				<< std::endl;
 }
 
 Animal&	Animal::operator=( const Animal& other )
 {
-	std::cout << "Copy assignment operator called"
-			  << std::endl;
+	std::cout	<< "Copy assignment operator called"
+				<< std::endl;
 	if (this != &other)
 		_type = other.getType();
 	return( *this );
@@ -34,10 +51,5 @@ std::string	Animal::getType() const
 	return ( _type );
 }
 
-// void		Animal::makeSound() const
-// {
-// 	std::cout << "This "
-// 			  << _type
-// 			  << " make no sound"
-// 			  << std::endl;
-// }
+void		Animal::makeSound() const
+{}

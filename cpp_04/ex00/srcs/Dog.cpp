@@ -1,52 +1,54 @@
+//-------> ./srcs.Dog.cpp <-------//
+
 # include "../includes/Dog.hpp"
 
-Dog::Dog( void )
+/*
+class Dog : public Animal
+{
+	public:
+		Dog();
+		Dog( const Dog& copy );
+		~Dog();
+		Dog&	operator=( const Dog& other );
+
+		//-------> Animal methode <-------//
+		void		makeSound() const;
+};
+*/
+
+Dog::Dog() : Animal()
 {
 	_type = "Dog";
-	std::cout << "Default constructor for Dog as been called"
-			  << std::endl;
+	std::cout	<< "Default constructor for Dog as been called"
+				<< std::endl;
 }
 
-Dog::Dog( const Dog& copy ) : Animal( copy )
+Dog::Dog( const Dog& other ) : Animal( other )
 {
-	*this = copy;
-	std::cout << "Copy constructor for Dog as been called"
-			  << std::endl;
+	*this = other;
+	std::cout	<< "Copy constructor for Dog as been called"
+				<< std::endl;
 }
 
-Dog::~Dog( void )
+Dog::~Dog()
 {
-	std::cout << "Destructor for Dog as been called"
-			  << std::endl;
+	std::cout	<< "Destructor for Dog as been called"
+				<< std::endl;
 }
 
 Dog&	Dog::operator=( const Dog& other )
 {
-	std::cout << "Copy assignment operator called"
-			  << std::endl;
+	std::cout	<< "Copy assignment operator called"
+				<< std::endl;
 	if ( this != &other )
-	{
 		_type = other.getType();
-		_sound = other.getSound();
-	}
 	return ( *this );
 }
 
-void		Dog::setSound( std::string sound )
-{
-	_sound = sound;
-}
+//-------> Animal methode <-------//
 
-std::string	Dog::getSound( void ) const
+void		Dog::makeSound() const
 {
-	return ( _sound );
-}
-
-void		Dog::makeSound( void ) const
-{
-	std::cout << "This "
-			  << _type
-			  << " make a "
-			  << _sound
-			  << std::endl;
+	std::cout	<< "This " << _type << " make a Waaf"
+				<< std::endl;
 }

@@ -15,8 +15,6 @@ class	Ice : public AMateria
 		//-------> AMateria methode <-------//
 		AMateria*	clone() const;
 		void		use( ICharacter& target );
-
-		//-------> Self methode <-------//
 };
 */
 
@@ -63,5 +61,3 @@ void		Ice::use( ICharacter& target )
     std::cout	<< "* shoots an ice bolt at " << target.getName()
 				<< " *" << std::endl;
 }
-
-//-------> Self methode <-------//

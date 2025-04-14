@@ -1,3 +1,5 @@
+//-------> ./includes/Cat.hpp <-------//
+
 # ifndef CAT_HPP
 #define CAT_HPP
 
@@ -5,8 +7,7 @@
 
 class Cat : public Animal
 {
-	protected:
-		std::string	_sound;
+	private:
 		Brain*		_brain;
 	public:
 		Cat();
@@ -15,10 +16,8 @@ class Cat : public Animal
 
 		Cat& operator=( const Cat& other );
 
-		void		setSound( std::string sound );
-		std::string	getSound() const;
 		void		makeSound() const;
 		Brain*		getBrain() const;
 };
 
-#endif	//CAT_HPP
+#endif	// CAT_HPP
