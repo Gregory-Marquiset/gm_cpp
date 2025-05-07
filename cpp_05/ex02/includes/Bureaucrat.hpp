@@ -3,8 +3,9 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-#include <string>
-#include <iostream>
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 class	Bureaucrat
 {
@@ -23,6 +24,8 @@ class	Bureaucrat
 		int					getGrade() const;
 		void				incrementGrade();
 		void				decrementGrade();
+		void				signForm(AForm& f);
+		void				executeForm(const AForm& form) const;
 
 		//-------> Self Exceptions <-------//
 		class	GradeTooHighException : public std::exception
