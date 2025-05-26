@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cctype>
+#include <sstream>
 
 		//-------> Checker utils <-------//
 

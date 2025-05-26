@@ -69,6 +69,11 @@ std::string	trimString(const std::string& literal)
 {
 	t_trimUtils	u;
 
+	if (literal.size() == 1)
+	{
+		u.trimed += literal[0];
+		return (u.trimed);
+	}
 	while (u.i < literal.size() && std::isspace(literal[u.i]))
 		u.i++;
 	while (u.i < literal.size() && !std::isspace(literal[u.i]))	
@@ -157,7 +162,9 @@ bool	isDouble(const std::string& s)
 	if (s[s.length() - 1] == '.' || s[s.length() - 1] == 'e' || s[s.length() - 1] == 'E'
 			|| s[s.length() - 1] == '+' || s[s.length() - 1] == '-')
 		return (false);
-	
+	if (s.find('.') == std::string::npos && s.find('e') == std::string::npos && s.find('E') == std::string::npos)
+		return (false);
+
 	std::size_t	i = 0;
 
 	if (s[i] == '+' || s[i] == '-')
@@ -170,31 +177,61 @@ bool	isDouble(const std::string& s)
 	return (true);
 }
 
-void	printConvChar(const std::string& s)
+std::string	dtostr_cpp98(int value)
 {
-	std::cout	<< "char: ";
-	if (s[0] >= 32 && s[0] < 127)
-		std::cout	<< s << std::endl;
-	else
-		std::cout	<< "non displayable" << std::endl;
+	std::ostringstream	oss;
+
+	oss	<< value;
+	return (oss.str());
 }
 
-void	printConvInt(const std::string& s)
+void	printConv(const std::string& s, enum e_type type)
 {
-	std::cout	<< "int: ";
-	std::cout	<< s << std::endl;
-}
+	std::string	strChar = "";
+	int			cInt = 0;
+	std::string	strInt = "";
+	float		cFloat = 0.0f;
+	std::string	strFloat = "";
+	double		cDouble = 0.0;
+	std::string	strDouble = "";
 
-void	printConvFloat(const std::string& s)
-{
-	std::cout	<< "float: ";
-	std::cout	<< s << std::endl;
-}
+	if (type == CHAR_TYPE)
+	{
+		strChar = s[0];
+		strInt = dtostr_cpp98((int)strChar[0]);
+		strFloat = dtostr_cpp98((int)strChar[0]);
+		strFloat += ".0f";
+		strDouble = dtostr_cpp98((int)strChar[0]);
+		strDouble += ".0";
+	}
+	else if (type == INT_TYPE)
+	{
+		cInt = std::atoi(s.c_str());
+		strInt = dtostr_cpp98(cInt);
+		if (cInt > -1 && cInt < 128)
+		{
+			if (std::isprint(cInt))
+				strChar = (char)cInt;
+			else
+				strChar = "non displayable";
+		}
+		else
+			strChar = "impossible";
+		cFloat = static_cast<float>(cInt);
+		strFloat = dtostr_cpp98(cFloat);	//	ne peut etre precis avec plus de 16 777 216
+		strFloat += ".0f";
+		strDouble = dtostr_cpp98(cInt);		// limite de precition 9 007 199 254 740 992
+		strDouble += ".0";
+	}
+	/*else if (type == FLOAT_TYPE)
+	{}
+	else if (type == DOUBLE_TYPE)
+	{}*/
 
-void	printConvDouble(const std::string& s)
-{
-	std::cout	<< "double: ";
-	std::cout	<< s << std::endl;
+	std::cout	<< "char: " << strChar << std::endl;
+	std::cout	<< "int: " << strInt << std::endl;
+	std::cout	<< "float: " << strFloat << std::endl;
+	std::cout	<< "double: " << strDouble << std::endl;
 }
 
 		//-------> Checker utils <-------//
@@ -230,11 +267,8 @@ void	SConv::convert(const std::string& literal)
 	{
 		if (checkers[i].check(literalTrimed) != UNKNOWN_TYPE)
 		{
-			std::cout	<< "convert from " << checkers[i].name << std::endl;
-			printConvChar(literalTrimed);
-			printConvInt(literalTrimed);
-			printConvFloat(literalTrimed);
-			printConvDouble(literalTrimed);
+			std::cout << checkers[i].name << std::endl;
+			printConv(literalTrimed, checkers[i].type);
 			return ;
 		}
 	}
