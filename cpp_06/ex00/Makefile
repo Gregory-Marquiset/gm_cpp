@@ -1,5 +1,7 @@
-SRCS = srcs/main.cpp \
-	   srcs/ScalarConverter.cpp 
+SRCS =	srcs/check.cpp \
+		srcs/display.cpp \
+		srcs/main.cpp \
+		srcs/ScalarConverter.cpp
 
 INCLUDES = -Iincludes
 NAME = convert
