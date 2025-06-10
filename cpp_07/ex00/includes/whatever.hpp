@@ -1,12 +1,12 @@
-//-------> ./includes/template.hpp <-------//
+//-------> ./includes/whatever.hpp <-------//
 
-#ifndef TEMPLATE_HPP
-#define TEMPLATE_HPP
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
 
 template<typename T>
 void	swap(T& a, T& b)
 {
-	T tmp = a;
+	T	tmp = a;
 	a = b;
 	b = tmp;
 }
@@ -18,10 +18,9 @@ const T&	min(const T& a, const T& b)
 }
 
 template<typename T>
-const T&
-max(const T& a, const T& b)
+const T&	max(const T& a, const T& b)
 {
 	return (a > b ? a : b);
 }
 
-#endif
+#endif //	WHATEVER_HPP
