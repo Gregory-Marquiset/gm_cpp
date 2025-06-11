@@ -1,7 +1,7 @@
 SRCS =	srcs/main.cpp
 
 INCLUDES = -Iincludes
-NAME = whatever
+NAME = easyfind
 CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MMD -MP
 RM = rm -rf

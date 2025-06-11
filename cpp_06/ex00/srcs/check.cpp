@@ -4,35 +4,28 @@
 
 static bool		checkTrim(t_trimUtils& u, const std::string& literal)
 {
-	// Règles générales
 	if (u.i != literal.size())
 		return (false);
 	if (u.sign > 1 || u.dot > 1 || u.exp > 1)
 		return (false);
 
-	// Vérifie que le signe est bien en première position s'il existe
 	if (u.sign == 1 && u.signPos > 0)
 		return (false);
 
-	// Vérifie la position du point par rapport à l'exposant
 	if (u.expPos > -1 && u.dotPos > u.expPos)
 		return (false);
 
-	// Empêche . ou e au tout début (sauf si seul caractère)
 	if (literal.size() > 1 && (u.dotPos == 0 || u.expPos == 0))
 		return (false);
 
-	// Empêche "+.1", "+e1", "-.1", "-e1"
 	if (u.sign == 1 &&
 		((u.dot == 1 && u.dotPos == 1) || (u.exp == 1 && u.expPos == 1)))
 		return (false);
 
-	// Empêche "1e", "1." etc.
 	if ((u.exp == 1 && u.trimed.length() > 1 && u.expPos == (int)u.trimed.length() - 1) ||
 		(u.dot == 1 && u.trimed.length() > 1 && u.dotPos == (int)u.trimed.length() - 1))
 		return (false);
 
-	// Empêche les cas type "1.e" ou "1e."
 	if (u.dot == 1 && u.exp == 1 && u.expPos == u.dotPos + 1)
 		return (false);
 
