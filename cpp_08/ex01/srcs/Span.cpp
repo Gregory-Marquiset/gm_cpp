@@ -4,42 +4,38 @@
 #include <limits>
 #include <cstdlib>
 
-Span::Span(unsigned int N) : _maxSize(N) {}
+Span::Span(unsigned int N) : _maxSize(N)
+{}
 
-Span::Span(const Span& other) : _maxSize(other._maxSize), _data(other._data) {}
+Span::Span(const Span& other) : _numbers(other._numbers), _maxSize(other._maxSize)
+{}
 
 Span& Span::operator=(const Span& other)
 {
     if (this != &other)
     {
         _maxSize = other._maxSize;
-        _data = other._data;
+        _numbers = other._numbers;
     }
-    return *this;
+    return (*this);
 }
 
-Span::~Span() {}
+Span::~Span()
+{}
 
 void Span::addNumber(int n)
 {
-    if (_data.size() >= _maxSize)
+    if (_numbers.size() >= _maxSize)
         throw Span::StorageFullException();
-    _data.push_back(n);
-}
-
-void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
-{
-    if (_data.size() + std::distance(begin, end) > _maxSize)
-        throw Span::StorageFullException();
-    _data.insert(_data.end(), begin, end);
+    _numbers.push_back(n);
 }
 
 int Span::shortestSpan() const
 {
-    if (_data.size() < 2)
-        throw Span::NotEnoughElementsException();
+    if (_numbers.size() < 2)
+        throw Span::NotEnoughNumbersException();
 
-    std::vector<int> sorted = _data;
+    std::vector<int> sorted = _numbers;
     std::sort(sorted.begin(), sorted.end());
 
     int minSpan = std::numeric_limits<int>::max();
@@ -49,27 +45,27 @@ int Span::shortestSpan() const
         if (diff < minSpan)
             minSpan = diff;
     }
-    return minSpan;
+    return (minSpan);
 }
 
 int Span::longestSpan() const
 {
-    if (_data.size() < 2)
-        throw Span::NotEnoughElementsException();
+    if (_numbers.size() < 2)
+        throw Span::NotEnoughNumbersException();
 
-    int min = *std::min_element(_data.begin(), _data.end());
-    int max = *std::max_element(_data.begin(), _data.end());
-    return max - min;
+    int min = *std::min_element(_numbers.begin(), _numbers.end());
+    int max = *std::max_element(_numbers.begin(), _numbers.end());
+    return (max - min);
 }
 
 // Exceptions
 
 const char* Span::StorageFullException::what() const throw()
 {
-    return "Cannot add more elements: storage is full.";
+    return ("Cannot add more elements: storage is full.");
 }
 
-const char* Span::NotEnoughElementsException::what() const throw()
+const char* Span::NotEnoughNumbersException::what() const throw()
 {
-    return "Not enough elements to calculate a span.";
+	return ("Not enough numbers to compute span!");
 }

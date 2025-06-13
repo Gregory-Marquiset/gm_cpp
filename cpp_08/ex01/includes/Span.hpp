@@ -34,23 +34,16 @@ class	Span
 		int		shortestSpan() const;
 		int		longestSpan() const;
 
-		// Exceptions personnalisées
 		class StorageFullException : public std::exception
 		{
-		public:
-			const char* what() const throw()
-			{
-				return "Cannot add number: storage is full!";
-			}
+			public:
+				const char* what() const throw();
 		};
 
 		class NotEnoughNumbersException : public std::exception
 		{
-		public:
-			const char* what() const throw()
-			{
-				return "Not enough numbers to compute span!";
-			}
+			public:
+				const char* what() const throw();
 		};
 };
 
