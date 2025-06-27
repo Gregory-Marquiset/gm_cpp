@@ -1,7 +1,8 @@
-SRCS =	srcs/main.cpp
+SRCS =	srcs/main.cpp \
+		srcs/RPN.cpp
 
 INCLUDES = -Iincludes
-NAME = btc
+NAME = RPN
 CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -MMD -MP
 RM = rm -rf
