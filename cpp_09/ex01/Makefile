@@ -1,5 +1,4 @@
-SRCS =	srcs/main.cpp \
-		srcs/BitcoinExchange.cpp
+SRCS =	srcs/main.cpp
 
 INCLUDES = -Iincludes
 NAME = btc

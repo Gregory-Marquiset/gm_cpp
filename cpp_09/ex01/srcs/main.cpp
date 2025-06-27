@@ -1,63 +1,27 @@
-//-------> ./srcs/BitcoinExchange.cpp <-------//
+//-------> ./srcs/Main.cpp <-------//
 
 #include "../includes/BitcoinExchange.hpp"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <map>
+#include <cctype>
+#include <cstdlib>
 
-BtcExchange::BtcExchange()
-{}
-
-BtcExchange::BtcExchange(const std::string& DataBaseFile, const std::string& InputFile)
-{
-	if (InputFile.empty())
-		throw(BadInputFileException());
-	if (!LoadDatabase(DataBaseFile) || _DataBase.empty())
-		throw(EmptyDataBaseException());
-	if (!ReadInputFile(InputFile))
-		throw(BadInputFileException());
-}
-
-BtcExchange::BtcExchange(const BtcExchange& Other)
-{
-	*this = Other;
-}
-
-BtcExchange::~BtcExchange()
-{}
-
-BtcExchange&	BtcExchange::operator=(const BtcExchange& Other)
-{
-	if (this != &Other)
-	{
-		_DataBase = Other._DataBase;
-	}
-	return (*this);
-}
-
-const char*	BtcExchange::BadInputFileException::what() const throw()
-{
-	return ("could not open file.");
-}
-
-const char*	BtcExchange::EmptyDataBaseException::what() const throw()
-{
-	return ("empty DataBase.");
-}
-
-//_________________________________________________________//
-
-
-static bool	IsLeapYear(int year)
+bool	IsLeapYear(int year)
 {
 	return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
 }
 
-static bool	IsSpace(const char c)
+bool	IsSpace(const char c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
 		return (true);
 	return (false);
 }
 
-static bool	IsValidDate(const std::string& date)
+bool	IsValidDate(const std::string& date)
 {
 	if (date.length() != 10)
 		return (false);
@@ -91,7 +55,7 @@ static bool	IsValidDate(const std::string& date)
 	return (true);
 }
 
-static bool	IsAValideValue(const std::string& s)
+bool	IsAValideValue(const std::string& s)
 {
 	if (s.empty())
 		return (false);
@@ -128,13 +92,13 @@ static bool	IsAValideValue(const std::string& s)
 	return (true);
 }
 
-bool	BtcExchange::LoadDatabase(const std::string& DataBaseFile)
+bool	loadDatabase(const std::string& filename, std::map<std::string, float>& rates)
 {
-	std::ifstream	file(DataBaseFile.c_str());
+	std::ifstream	file(filename.c_str());
 	if (!file)
 	{
 		std::cerr	<< "Error: could not open database file \"" 
-					<< DataBaseFile << "\"" << std::endl;
+					<< filename << "\"" << std::endl;
 		return (false);
 	}
 
@@ -175,17 +139,26 @@ bool	BtcExchange::LoadDatabase(const std::string& DataBaseFile)
 		if (!IsValidDate(trimDate))
 			continue;
 
-		_DataBase[trimDate] = rate;
+		rates[trimDate] = rate;
 	}
 
 	return (true);
 }
 
-bool	BtcExchange::ReadInputFile(const std::string& InputFile) const
+bool	readInputFile(const std::string& filename, const std::map<std::string, float>& Database)
 {
-	std::ifstream			file(InputFile.c_str());
+	std::ifstream			file(filename.c_str());
 	if (!file)
+	{
+		std::cerr	<< "Error: could not open input file \""
+					<< filename << "\"" << std::endl;
 		return (false);
+	}
+	if (Database.empty())
+	{
+		std::cerr	<< "Error: Empty DataBase." << std::endl;
+		return (false);
+	}
 
 	std::string				line;
 	if (!std::getline(file, line))
@@ -248,23 +221,42 @@ bool	BtcExchange::ReadInputFile(const std::string& InputFile) const
 		}
 		else
 		{
-			std::map<std::string, float>::const_iterator it = _DataBase.lower_bound(trimDate);
-			if (it != _DataBase.end() && it->first == trimDate)
+			std::map<std::string, float>::const_iterator it = Database.lower_bound(trimDate);
+			if (it != Database.end() && it->first == trimDate)
 			{
 				std::cout	<< trimDate << " => " << rate << " = " << it->second * rate	<< std::endl;
 				continue;
 			}
 			else
 			{
-				if (it != _DataBase.begin())
+				if (it != Database.begin())
 				{
 					--it;
 					std::cout	<< trimDate << " => " << rate << " = " << it->second * rate	<< std::endl;
 				}
 				else
-					std::cerr << "Error: no date <= " << trimDate << " found in Database." << std::endl;
+					std::cerr << "Error: no date <= " << trimDate << " found in database." << std::endl;
 			}
 		}
 	}
 	return (true);
+}
+
+int	main(int argc, char** argv)
+{
+	if (argc != 2)
+	{
+		std::cerr	<< "Error: could not open file." << std::endl;
+		return (1);
+	}
+
+	std::string						DataFileName	= static_cast<std::string>(argv[1]);
+	std::map<std::string, float>	BtcData;
+
+	if (!loadDatabase("data.csv", BtcData))
+		return (2);
+
+	if (!readInputFile(DataFileName, BtcData))
+		return (3);
+	return (0);
 }
