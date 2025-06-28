@@ -61,7 +61,7 @@ void	RPN::ResolveEquation(const std::string& Equation)
 {
 	std::istringstream	Iss(Equation);
 	std::string			Token;
-	int					A, B, Result;
+	int					A, B, Result, Num;
 
 	while (Iss >> Token)
 	{
@@ -91,12 +91,11 @@ void	RPN::ResolveEquation(const std::string& Equation)
 		else
 		{
 			std::istringstream	conv(Token);
-			int					num;
-			if(!(conv >> num) || !(conv.eof()))
+			if(!(conv >> Num) || !(conv.eof()))
 				throw(InvalideTokenException());
-			if (num >= 10 || num < 0)
+			if (Num >= 10 || Num < 0)
 				throw(NumberNotInRangeException());
-			_Pile.push(num);
+			_Pile.push(Num);
 		}
 	}
 	if (_Pile.size() != 1)
