@@ -41,24 +41,3 @@ const char*	PmergeMe::InvalideTokenException::what() const throw()
 {
 	return ("only positive integer is allowed.");
 }
-
-//__________________________________________//
-
-void	PmergeMe::CheckUserInput(const std::string& Input)
-{
-	std::istringstream	Split(Input);
-	std::string			Token;
-	int					Num;
-
-	while (Split >> Token)
-	{
-		std::istringstream	conv(Token);
-
-		if(!(conv >> Num) || !(conv.eof()))
-			throw(InvalideTokenException());
-		if (Num == 0)
-			throw(ZeroIntegerException());
-		else if (Num < 0)
-			throw(NegatifIntegerException());
-	}
-}
